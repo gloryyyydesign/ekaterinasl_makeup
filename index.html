@@ -23,8 +23,9 @@
       --ff-serif: 'Cormorant Garamond', Georgia, serif;
       --ff-sans:  'Jost', sans-serif;
       --ease: cubic-bezier(.25,.46,.45,.94);
+      --header-h: 64px;
     }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
     body {
       background: var(--cream);
       color: var(--dark);
@@ -33,204 +34,119 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-    img { display: block; width: 100%; }
+    img { display: block; width: 100%; object-fit: cover; }
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
-
-    /* ── Utility ── */
     .container { width: min(1120px, 92vw); margin-inline: auto; }
-    .sr-only { position: absolute; width: 1px; height: 1px; clip: rect(0,0,0,0); overflow: hidden; }
     [data-lang] { display: none; }
     [data-lang].active { display: block; }
     span[data-lang].active { display: inline; }
 
-    /* ── Language bar ── */
-    #lang-bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: flex-end; align-items: center;
-      padding: .75rem 5vw;
-      background: rgba(250,247,244,.88);
-      backdrop-filter: blur(12px);
+    /* ── HEADER / NAV ── */
+    #site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--header-h);
+      display: flex; align-items: center;
+      background: rgba(250,247,244,.92);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(201,169,154,.18);
       transition: box-shadow .3s;
     }
-    #lang-bar.scrolled { box-shadow: 0 2px 24px rgba(42,31,26,.08); }
+    #site-header.scrolled { box-shadow: 0 2px 24px rgba(42,31,26,.09); }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%;
+    }
+    .header-logo {
+      font-family: var(--ff-serif);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--dark);
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+    .header-logo span { color: var(--rose-dk); }
+    .header-nav {
+      display: flex; align-items: center; gap: .2rem;
+    }
+    .nav-link {
+      font-size: .7rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--mid);
+      padding: .4rem .7rem;
+      border-radius: 2px;
+      transition: color .2s, background .2s;
+    }
+    .nav-link:hover { color: var(--rose-dk); background: rgba(201,169,154,.12); }
+    .header-right { display: flex; align-items: center; gap: .5rem; }
     .lang-btn {
       font-family: var(--ff-sans);
-      font-size: .72rem;
+      font-size: .65rem;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--mid);
       background: none;
       border: none;
       cursor: pointer;
-      padding: .3rem .55rem;
+      padding: .3rem .45rem;
       border-radius: 2px;
       transition: color .2s, background .2s;
     }
     .lang-btn.active, .lang-btn:hover { color: var(--rose-dk); background: rgba(201,169,154,.15); }
-    .lang-sep { color: var(--rose); opacity: .4; font-size: .7rem; }
+    .lang-sep { color: var(--rose); opacity: .35; font-size: .65rem; }
 
-    /* ── HERO ── */
-    #hero {
-      position: relative;
-      height: 100svh;
-      min-height: 560px;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
+    /* Hamburger for mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: .4rem;
     }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,169,154,.35) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(122,92,82,.18) 0%, transparent 65%),
-        linear-gradient(160deg, #f5ece6 0%, #faf7f4 55%, #ede6e0 100%);
+    .hamburger span {
+      display: block; width: 22px; height: 1px;
+      background: var(--dark);
+      transition: transform .3s, opacity .3s;
     }
-    /* Decorative petals / blobs */
-    .hero-bg::before, .hero-bg::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
+    .mobile-menu {
+      display: none;
+      position: fixed; top: var(--header-h); left: 0; right: 0;
+      background: rgba(250,247,244,.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,169,154,.2);
+      padding: 1.2rem 5vw 1.5rem;
+      flex-direction: column; gap: .2rem;
+      z-index: 190;
     }
-    .hero-bg::before {
-      width: 520px; height: 520px;
-      top: -120px; right: -80px;
-      background: rgba(201,169,154,.28);
-      animation: float 8s ease-in-out infinite;
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .nav-link { font-size: .78rem; padding: .6rem .5rem; }
+
+    @media (max-width: 860px) {
+      .header-nav { display: none; }
+      .hamburger { display: flex; }
     }
-    .hero-bg::after {
-      width: 380px; height: 380px;
-      bottom: -80px; left: -60px;
-      background: rgba(158,112,96,.15);
-      animation: float 10s ease-in-out infinite reverse;
-    }
-    @keyframes float {
-      0%,100% { transform: translateY(0) scale(1); }
-      50%      { transform: translateY(-30px) scale(1.04); }
+    @media (max-width: 480px) {
+      .header-logo { font-size: 1rem; }
     }
 
-    .hero-inner {
-      position: relative; z-index: 1;
-      text-align: center;
-      padding: 6rem 1rem 3rem;
+    /* ── Scroll progress bar ── */
+    #progress {
+      position: fixed; top: var(--header-h); left: 0; z-index: 300;
+      height: 2px;
+      background: linear-gradient(90deg, var(--rose), var(--rose-dk));
+      width: 0%; transition: width .1s linear;
     }
-    .hero-eyebrow {
-      font-family: var(--ff-sans);
-      font-size: .72rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--rose-dk);
-      margin-bottom: 1.4rem;
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp .9s var(--ease) .2s forwards;
-    }
-    .hero-name {
-      font-family: var(--ff-serif);
-      font-size: clamp(3.2rem, 9vw, 7.2rem);
-      font-weight: 400;
-      line-height: 1;
-      color: var(--dark);
-      opacity: 0;
-      transform: translateY(24px);
-      animation: fadeUp 1.1s var(--ease) .45s forwards;
-    }
-    .hero-name em { font-style: italic; color: var(--rose-dk); }
-    .hero-subtitle {
-      font-family: var(--ff-serif);
-      font-size: clamp(1rem, 2.2vw, 1.35rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--mid);
-      margin-top: 1.1rem;
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp .9s var(--ease) .75s forwards;
-    }
-    .hero-divider {
-      width: 60px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--rose), transparent);
-      margin: 2rem auto;
-      opacity: 0;
-      animation: fadeUp .7s var(--ease) 1.05s forwards;
-    }
-    .hero-cta {
-      display: inline-block;
-      font-family: var(--ff-sans);
-      font-size: .78rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: var(--rose-dk);
-      padding: .9rem 2.4rem;
-      border-radius: 2px;
-      transition: background .25s, transform .25s;
-      opacity: 0;
-      animation: fadeUp .8s var(--ease) 1.25s forwards;
-    }
-    .hero-cta:hover { background: var(--mink); transform: translateY(-2px); }
-
-    .scroll-hint {
-      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: .5rem;
-      opacity: 0; animation: fadeUp .8s var(--ease) 1.6s forwards;
-    }
-    .scroll-hint span {
-      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
-      color: var(--rose); opacity: .7;
-    }
-    .scroll-arrow {
-      width: 20px; height: 30px;
-      border: 1px solid var(--rose);
-      border-radius: 10px;
-      position: relative;
-    }
-    .scroll-arrow::after {
-      content: '';
-      position: absolute;
-      top: 6px; left: 50%; transform: translateX(-50%);
-      width: 3px; height: 6px;
-      background: var(--rose);
-      border-radius: 2px;
-      animation: scrollDot 1.8s ease-in-out infinite;
-    }
-    @keyframes scrollDot {
-      0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
-      100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-    }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Parallax lines (decorative) ── */
-    .hero-line {
-      position: absolute;
-      background: linear-gradient(180deg, rgba(201,169,154,.18), transparent);
-      width: 1px;
-      top: 0; bottom: 0;
-      pointer-events: none;
-    }
-    .hero-line:nth-child(1) { left: 15%; }
-    .hero-line:nth-child(2) { left: 50%; }
-    .hero-line:nth-child(3) { right: 15%; }
 
     /* ── Section shared ── */
     section { padding: 6rem 0; }
     .section-label {
       font-family: var(--ff-sans);
-      font-size: .68rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--rose-dk);
-      margin-bottom: .9rem;
+      font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--rose-dk); margin-bottom: .9rem;
     }
     .section-title {
       font-family: var(--ff-serif);
       font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 400;
-      line-height: 1.15;
-      color: var(--dark);
+      font-weight: 400; line-height: 1.15; color: var(--dark);
     }
     .section-title em { font-style: italic; color: var(--rose-dk); }
     .section-line {
@@ -241,115 +157,176 @@
 
     /* ── Reveal animation ── */
     .reveal {
-      opacity: 0;
-      transform: translateY(36px);
+      opacity: 0; transform: translateY(36px);
       transition: opacity .8s var(--ease), transform .8s var(--ease);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100svh; min-height: 580px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      margin-top: var(--header-h);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,169,154,.35) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(122,92,82,.18) 0%, transparent 65%),
+        linear-gradient(160deg, #f5ece6 0%, #faf7f4 55%, #ede6e0 100%);
+      transition: transform .1s ease-out;
+    }
+    .hero-bg::before, .hero-bg::after {
+      content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
+    }
+    .hero-bg::before {
+      width: 520px; height: 520px; top: -120px; right: -80px;
+      background: rgba(201,169,154,.28); animation: float 8s ease-in-out infinite;
+    }
+    .hero-bg::after {
+      width: 380px; height: 380px; bottom: -80px; left: -60px;
+      background: rgba(158,112,96,.15); animation: float 10s ease-in-out infinite reverse;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-30px) scale(1.04); }
+    }
+    .hero-line {
+      position: absolute;
+      background: linear-gradient(180deg, rgba(201,169,154,.18), transparent);
+      width: 1px; top: 0; bottom: 0; pointer-events: none;
+    }
+    .hero-line:nth-child(1) { left: 15%; }
+    .hero-line:nth-child(2) { left: 50%; }
+    .hero-line:nth-child(3) { right: 15%; }
+    .hero-inner {
+      position: relative; z-index: 1;
+      text-align: center; padding: 4rem 1rem 3rem;
+    }
+    .hero-eyebrow {
+      font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--rose-dk); margin-bottom: 1.4rem;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp .9s var(--ease) .2s forwards;
+    }
+    .hero-name {
+      font-family: var(--ff-serif);
+      font-size: clamp(3.2rem, 9vw, 7.2rem);
+      font-weight: 400; line-height: 1; color: var(--dark);
+      opacity: 0; transform: translateY(24px);
+      animation: fadeUp 1.1s var(--ease) .45s forwards;
+    }
+    .hero-name em { font-style: italic; color: var(--rose-dk); }
+    .hero-subtitle {
+      font-family: var(--ff-serif);
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      font-weight: 300; font-style: italic; color: var(--mid); margin-top: 1.1rem;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp .9s var(--ease) .75s forwards;
+    }
+    .hero-divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose), transparent);
+      margin: 2rem auto;
+      opacity: 0; animation: fadeUp .7s var(--ease) 1.05s forwards;
+    }
+    .hero-cta {
+      display: inline-block;
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--white); background: var(--rose-dk);
+      padding: .9rem 2.4rem; border-radius: 2px;
+      transition: background .25s, transform .25s;
+      opacity: 0; animation: fadeUp .8s var(--ease) 1.25s forwards;
+    }
+    .hero-cta:hover { background: var(--mink); transform: translateY(-2px); }
+    .scroll-hint {
+      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      opacity: 0; animation: fadeUp .8s var(--ease) 1.6s forwards;
+    }
+    .scroll-hint span {
+      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--rose); opacity: .7;
+    }
+    .scroll-arrow {
+      width: 20px; height: 30px; border: 1px solid var(--rose); border-radius: 10px; position: relative;
+    }
+    .scroll-arrow::after {
+      content: ''; position: absolute;
+      top: 6px; left: 50%; transform: translateX(-50%);
+      width: 3px; height: 6px; background: var(--rose); border-radius: 2px;
+      animation: scrollDot 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollDot {
+      0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
     /* ── SERVICES ── */
     #services { background: var(--white); }
-    .services-header { margin-bottom: 3.5rem; }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
     .service-card {
-      position: relative;
-      background: var(--cream);
-      border: 1px solid rgba(201,169,154,.25);
-      border-radius: 4px;
+      position: relative; background: var(--cream);
+      border: 1px solid rgba(201,169,154,.25); border-radius: 4px;
       padding: 2.4rem 2rem;
-      transition: box-shadow .3s, transform .3s;
-      overflow: hidden;
+      transition: box-shadow .3s, transform .3s; overflow: hidden;
     }
     .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
+      content: ''; position: absolute; top: 0; left: 0;
       width: 3px; height: 100%;
       background: linear-gradient(180deg, var(--rose), var(--rose-dk));
-      transform: scaleY(0);
-      transform-origin: top;
+      transform: scaleY(0); transform-origin: top;
       transition: transform .35s var(--ease);
     }
     .service-card:hover { box-shadow: 0 12px 40px rgba(42,31,26,.09); transform: translateY(-4px); }
     .service-card:hover::before { transform: scaleY(1); }
     .service-number {
-      font-family: var(--ff-serif);
-      font-size: 3.5rem;
-      font-weight: 300;
-      color: rgba(201,169,154,.28);
-      line-height: 1;
-      margin-bottom: .6rem;
+      font-family: var(--ff-serif); font-size: 3.5rem; font-weight: 300;
+      color: rgba(201,169,154,.28); line-height: 1; margin-bottom: .6rem;
     }
     .service-icon { font-size: 1.6rem; margin-bottom: .8rem; }
     .service-name {
-      font-family: var(--ff-serif);
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: var(--dark);
-      margin-bottom: .5rem;
+      font-family: var(--ff-serif); font-size: 1.4rem; font-weight: 500;
+      color: var(--dark); margin-bottom: .5rem;
     }
-    .service-desc {
-      font-size: .88rem;
-      color: var(--mid);
-      line-height: 1.65;
-      margin-bottom: 1.2rem;
-    }
+    .service-desc { font-size: .88rem; color: var(--mid); line-height: 1.65; margin-bottom: 1.2rem; }
     .service-price {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .78rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--rose-dk);
-      font-weight: 500;
-      border-top: 1px solid rgba(201,169,154,.3);
-      padding-top: 1rem;
-      width: 100%;
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--rose-dk); font-weight: 500;
+      border-top: 1px solid rgba(201,169,154,.3); padding-top: 1rem; width: 100%;
     }
     .service-price .price-val {
-      font-family: var(--ff-serif);
-      font-size: 1.15rem;
-      font-weight: 400;
-      color: var(--dark);
-      letter-spacing: 0;
-      margin-left: auto;
+      font-family: var(--ff-serif); font-size: 1.15rem; font-weight: 400;
+      color: var(--dark); letter-spacing: 0; margin-left: auto;
     }
 
-    /* ── Brow Tariff ── */
+    /* ── BROW TARIFF ── */
     #brow-tariff { background: var(--light); }
     .tariff-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
     }
     @media (max-width: 680px) { .tariff-wrap { grid-template-columns: 1fr; } }
     .tariff-table { width: 100%; border-collapse: collapse; }
     .tariff-table th {
-      font-family: var(--ff-sans);
-      font-size: .68rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--rose-dk);
-      padding: .6rem 1rem;
-      text-align: left;
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--rose-dk); padding: .6rem 1rem; text-align: left;
       border-bottom: 1px solid rgba(201,169,154,.4);
     }
     .tariff-table td {
-      padding: 1rem 1rem;
-      font-size: .9rem;
-      border-bottom: 1px solid rgba(201,169,154,.15);
-      color: var(--dark);
+      padding: 1rem; font-size: .9rem;
+      border-bottom: 1px solid rgba(201,169,154,.15); color: var(--dark);
     }
     .tariff-table td:last-child {
-      font-family: var(--ff-serif);
-      font-size: 1.05rem;
-      color: var(--mink);
+      font-family: var(--ff-serif); font-size: 1.05rem; color: var(--mink);
     }
     .tariff-table tr:last-child td { border-bottom: none; }
     .tariff-table tr:hover td { background: rgba(201,169,154,.08); }
@@ -360,203 +337,294 @@
     #why .section-line { background: var(--rose); }
     #why .section-label { color: rgba(201,169,154,.7); }
     .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      margin-top: 1rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem; margin-top: 1rem;
     }
     .why-card {
-      padding: 2rem;
-      border: 1px solid rgba(201,169,154,.12);
-      border-radius: 4px;
+      padding: 2rem; border: 1px solid rgba(201,169,154,.12); border-radius: 4px;
       transition: border-color .3s, background .3s;
     }
     .why-card:hover { border-color: rgba(201,169,154,.35); background: rgba(201,169,154,.05); }
-    .why-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+    .why-icon { font-size: 2rem; margin-bottom: 1rem; }
     .why-title {
-      font-family: var(--ff-serif);
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--rose);
-      margin-bottom: .6rem;
+      font-family: var(--ff-serif); font-size: 1.2rem; font-weight: 500;
+      color: var(--rose); margin-bottom: .6rem;
     }
     .why-text { font-size: .88rem; color: rgba(250,247,244,.7); line-height: 1.7; }
 
     /* ── CASES ── */
     #cases { background: var(--white); }
     .cases-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; margin-bottom: 2.5rem;
     }
     .case-card {
-      border-radius: 4px;
-      overflow: hidden;
+      border-radius: 4px; overflow: hidden;
       border: 1px solid rgba(201,169,154,.2);
       transition: box-shadow .3s, transform .3s;
     }
     .case-card:hover { box-shadow: 0 16px 48px rgba(42,31,26,.1); transform: translateY(-5px); }
     .case-img-wrap {
-      position: relative;
-      aspect-ratio: 4/5;
-      background: var(--light);
-      overflow: hidden;
+      position: relative; aspect-ratio: 4/5;
+      background: var(--light); overflow: hidden;
     }
+    .case-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     .case-placeholder {
       width: 100%; height: 100%;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: .8rem;
+      align-items: center; justify-content: center; gap: .8rem;
       background: linear-gradient(145deg, #f0e8e4, #e8ddd8);
     }
     .case-placeholder .ph-icon { font-size: 2.8rem; opacity: .4; }
     .case-placeholder .ph-label {
-      font-family: var(--ff-sans);
-      font-size: .7rem;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--mid);
-      opacity: .6;
+      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--mid); opacity: .6;
     }
     .case-tag {
-      position: absolute;
-      top: 1rem; left: 1rem;
-      background: rgba(42,31,26,.6);
-      color: var(--cream);
-      font-size: .65rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: .3rem .7rem;
-      border-radius: 2px;
-      backdrop-filter: blur(6px);
+      position: absolute; top: 1rem; left: 1rem;
+      background: rgba(42,31,26,.6); color: var(--cream);
+      font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+      padding: .3rem .7rem; border-radius: 2px; backdrop-filter: blur(6px);
     }
     .case-body { padding: 1.4rem 1.5rem; background: var(--cream); }
     .case-client {
-      font-family: var(--ff-serif);
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: var(--dark);
-      margin-bottom: .35rem;
+      font-family: var(--ff-serif); font-size: 1.15rem; font-weight: 500;
+      color: var(--dark); margin-bottom: .35rem;
     }
     .case-service {
-      font-size: .75rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--rose-dk);
-      margin-bottom: .7rem;
+      font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--rose-dk); margin-bottom: .7rem;
     }
     .case-desc { font-size: .86rem; color: var(--mid); line-height: 1.6; }
+    .cases-cta-wrap { text-align: center; margin-top: 1rem; }
+    .btn-outline {
+      display: inline-block;
+      font-size: .75rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--rose-dk); border: 1px solid var(--rose);
+      padding: .85rem 2.2rem; border-radius: 2px;
+      transition: background .25s, color .25s, transform .25s;
+    }
+    .btn-outline:hover { background: var(--rose-dk); color: var(--white); transform: translateY(-2px); }
+
+    /* ── TRAINING ── */
+    #training { background: var(--cream); }
+    .training-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .training-card {
+      background: var(--white); border: 1px solid rgba(201,169,154,.25);
+      border-radius: 4px; padding: 2.4rem 2rem;
+      transition: box-shadow .3s, transform .3s;
+      position: relative; overflow: hidden;
+    }
+    .training-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose), var(--rose-dk));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s var(--ease);
+    }
+    .training-card:hover { box-shadow: 0 12px 40px rgba(42,31,26,.09); transform: translateY(-4px); }
+    .training-card:hover::after { transform: scaleX(1); }
+    .training-badge {
+      display: inline-block;
+      font-size: .62rem; letter-spacing: .15em; text-transform: uppercase;
+      padding: .3rem .75rem; border-radius: 20px; margin-bottom: 1.2rem;
+    }
+    .badge-online { background: rgba(201,169,154,.2); color: var(--rose-dk); }
+    .badge-offline { background: rgba(42,31,26,.08); color: var(--dark); }
+    .training-icon { font-size: 2rem; margin-bottom: .8rem; }
+    .training-name {
+      font-family: var(--ff-serif); font-size: 1.35rem; font-weight: 500;
+      color: var(--dark); margin-bottom: .8rem; line-height: 1.3;
+    }
+    .training-list {
+      display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.5rem;
+    }
+    .training-list li {
+      display: flex; align-items: flex-start; gap: .6rem;
+      font-size: .86rem; color: var(--mid); line-height: 1.55;
+    }
+    .training-list li::before {
+      content: '—'; color: var(--rose); flex-shrink: 0; margin-top: .05em;
+    }
+    .training-price-wrap {
+      border-top: 1px solid rgba(201,169,154,.3); padding-top: 1.2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .training-price-label {
+      font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--rose-dk);
+    }
+    .training-price-val {
+      font-family: var(--ff-serif); font-size: 1.3rem; color: var(--dark);
+    }
 
     /* ── CONTACTS ── */
-    #contacts { background: var(--cream); }
+    #contacts { background: var(--light); }
     .contacts-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
     }
     @media (max-width: 700px) { .contacts-wrap { grid-template-columns: 1fr; gap: 3rem; } }
     .contact-tagline {
       font-family: var(--ff-serif);
-      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-      font-style: italic;
-      color: var(--mid);
-      margin-bottom: 2rem;
-      line-height: 1.4;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-style: italic;
+      color: var(--mid); margin-bottom: 2rem; line-height: 1.4;
     }
     .contact-links { display: flex; flex-direction: column; gap: 1.1rem; }
     .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.2rem 1.5rem;
-      background: var(--white);
-      border: 1px solid rgba(201,169,154,.25);
-      border-radius: 4px;
-      transition: box-shadow .25s, border-color .25s, transform .25s;
-      color: var(--dark);
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.2rem 1.5rem; background: var(--white);
+      border: 1px solid rgba(201,169,154,.25); border-radius: 4px;
+      transition: box-shadow .25s, border-color .25s, transform .25s; color: var(--dark);
     }
     .contact-link:hover { box-shadow: 0 8px 28px rgba(42,31,26,.08); border-color: var(--rose); transform: translateX(4px); }
     .contact-link-icon {
-      width: 44px; height: 44px;
-      border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%;
       background: var(--light);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
+      font-size: 1.2rem; flex-shrink: 0;
     }
     .contact-link-text { display: flex; flex-direction: column; }
     .contact-link-label {
-      font-size: .68rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--rose-dk);
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--rose-dk);
     }
-    .contact-link-value {
-      font-family: var(--ff-serif);
-      font-size: 1.05rem;
-      color: var(--dark);
-    }
-    .contact-note {
-      margin-top: 2rem;
-      font-size: .85rem;
-      color: var(--mid);
-      line-height: 1.7;
-    }
+    .contact-link-value { font-family: var(--ff-serif); font-size: 1.05rem; color: var(--dark); }
+    .contact-note { margin-top: 2rem; font-size: .85rem; color: var(--mid); line-height: 1.7; }
 
-    /* ── Footer ── */
-    footer {
-      background: var(--dark);
-      color: rgba(250,247,244,.45);
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: .75rem;
-      letter-spacing: .06em;
+    /* ── FOOTER ── */
+    footer { background: var(--dark); color: rgba(250,247,244,.55); }
+    .footer-inner {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem; padding: 4rem 0 3rem;
     }
-    footer span { color: var(--rose); opacity: .6; }
-
-    /* ── Scroll progress bar ── */
-    #progress {
-      position: fixed; top: 0; left: 0; z-index: 200;
-      height: 2px;
-      background: linear-gradient(90deg, var(--rose), var(--rose-dk));
-      width: 0%;
-      transition: width .1s linear;
+    @media (max-width: 700px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
+    .footer-brand { font-family: var(--ff-serif); }
+    .footer-brand-name {
+      font-size: 1.4rem; font-style: italic; color: var(--rose);
+      margin-bottom: .5rem;
     }
+    .footer-brand-sub {
+      font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(250,247,244,.35); margin-bottom: 1rem;
+    }
+    .footer-brand-desc { font-size: .85rem; line-height: 1.7; color: rgba(250,247,244,.5); }
+    .footer-col-title {
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--rose); margin-bottom: 1rem;
+    }
+    .footer-address { font-size: .88rem; line-height: 1.9; color: rgba(250,247,244,.6); }
+    .footer-address strong { color: rgba(250,247,244,.85); font-weight: 400; }
+    .footer-links-list { display: flex; flex-direction: column; gap: .5rem; }
+    .footer-links-list a {
+      font-size: .85rem; color: rgba(250,247,244,.55);
+      transition: color .2s;
+    }
+    .footer-links-list a:hover { color: var(--rose); }
+    .footer-bottom {
+      border-top: 1px solid rgba(201,169,154,.12);
+      padding: 1.5rem 0;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: .5rem;
+    }
+    .footer-bottom p { font-size: .75rem; letter-spacing: .05em; }
+    .footer-heart { color: var(--rose); opacity: .6; }
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
       section { padding: 4rem 0; }
-      .services-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .cases-grid { grid-template-columns: 1fr; }
+      .services-grid, .why-grid, .cases-grid, .training-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
 <!-- Progress bar -->
-<div id="progress" role="progressbar" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
 
-<!-- Language bar -->
-<header id="lang-bar">
-  <nav aria-label="Language selector">
-    <button class="lang-btn active" onclick="setLang('en')" aria-label="English">EN</button>
-    <span class="lang-sep" aria-hidden="true">·</span>
-    <button class="lang-btn" onclick="setLang('pl')" aria-label="Polski">PL</button>
-    <span class="lang-sep" aria-hidden="true">·</span>
-    <button class="lang-btn" onclick="setLang('ru')" aria-label="Русский">RU</button>
-  </nav>
+<!-- ═══ HEADER ═══ -->
+<header id="site-header">
+  <div class="container header-inner">
+
+    <a href="#hero" class="header-logo">
+      <span>ekaterina</span>sl makeup
+    </a>
+
+    <nav class="header-nav" aria-label="Main navigation">
+      <a class="nav-link" href="#services">
+        <span data-lang="en" class="active">Services</span>
+        <span data-lang="pl">Usługi</span>
+        <span data-lang="ru">Услуги</span>
+      </a>
+      <a class="nav-link" href="#why">
+        <span data-lang="en" class="active">Why me</span>
+        <span data-lang="pl">Dlaczego ja</span>
+        <span data-lang="ru">Почему я</span>
+      </a>
+      <a class="nav-link" href="#cases">
+        <span data-lang="en" class="active">Portfolio</span>
+        <span data-lang="pl">Portfolio</span>
+        <span data-lang="ru">Портфолио</span>
+      </a>
+      <a class="nav-link" href="#training">
+        <span data-lang="en" class="active">Training</span>
+        <span data-lang="pl">Szkolenia</span>
+        <span data-lang="ru">Обучение</span>
+      </a>
+      <a class="nav-link" href="#contacts">
+        <span data-lang="en" class="active">Contact</span>
+        <span data-lang="pl">Kontakt</span>
+        <span data-lang="ru">Контакт</span>
+      </a>
+    </nav>
+
+    <div class="header-right">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <span class="lang-sep" aria-hidden="true">·</span>
+      <button class="lang-btn" onclick="setLang('pl')">PL</button>
+      <span class="lang-sep" aria-hidden="true">·</span>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
 </header>
 
-<!-- ═══════════════════════════════════════════════
-     HERO
-═══════════════════════════════════════════════ -->
+<!-- Mobile nav -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a class="nav-link" href="#services" onclick="closeMobile()">
+    <span data-lang="en" class="active">Services</span>
+    <span data-lang="pl">Usługi</span>
+    <span data-lang="ru">Услуги</span>
+  </a>
+  <a class="nav-link" href="#why" onclick="closeMobile()">
+    <span data-lang="en" class="active">Why me</span>
+    <span data-lang="pl">Dlaczego ja</span>
+    <span data-lang="ru">Почему я</span>
+  </a>
+  <a class="nav-link" href="#cases" onclick="closeMobile()">
+    <span data-lang="en" class="active">Portfolio</span>
+    <span data-lang="pl">Portfolio</span>
+    <span data-lang="ru">Портфолио</span>
+  </a>
+  <a class="nav-link" href="#training" onclick="closeMobile()">
+    <span data-lang="en" class="active">Training</span>
+    <span data-lang="pl">Szkolenia</span>
+    <span data-lang="ru">Обучение</span>
+  </a>
+  <a class="nav-link" href="#contacts" onclick="closeMobile()">
+    <span data-lang="en" class="active">Contact</span>
+    <span data-lang="pl">Kontakt</span>
+    <span data-lang="ru">Контакт</span>
+  </a>
+</div>
+
+<!-- ═══ HERO ═══ -->
 <section id="hero" aria-label="Hero">
-  <div class="hero-bg">
+  <div class="hero-bg" id="hero-bg">
     <div class="hero-line" aria-hidden="true"></div>
     <div class="hero-line" aria-hidden="true"></div>
     <div class="hero-line" aria-hidden="true"></div>
@@ -586,12 +654,10 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════
-     SERVICES
-═══════════════════════════════════════════════ -->
+<!-- ═══ SERVICES ═══ -->
 <section id="services">
   <div class="container">
-    <div class="services-header reveal">
+    <div class="reveal" style="margin-bottom:3.5rem;">
       <p class="section-label">
         <span data-lang="en" class="active">What I offer</span>
         <span data-lang="pl">Moja oferta</span>
@@ -606,7 +672,6 @@
     </div>
     <div class="services-grid">
 
-      <!-- 1 Bridal -->
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">01</div>
         <div class="service-icon" aria-hidden="true">🌸</div>
@@ -616,100 +681,96 @@
           <span data-lang="ru">Свадебный макияж</span>
         </h3>
         <p class="service-desc">
-          <span data-lang="en" class="active">Timeless, radiant looks designed to last through every emotion of your wedding day — ceremony, dance floor and golden-hour portraits included.</span>
-          <span data-lang="pl">Ponadczasowe, promieniące spojrzenie stworzone na cały dzień ślubu — od ceremonii po wieczorne tańce.</span>
+          <span data-lang="en" class="active">Timeless, radiant looks designed to last through every emotion of your wedding day — ceremony, dance floor and golden-hour portraits.</span>
+          <span data-lang="pl">Ponadczasowy, promienny makijaż stworzony na cały dzień ślubu — od ceremonii po wieczorne tańce.</span>
           <span data-lang="ru">Безупречный образ, который сохраняется весь день — от церемонии до вечеринки и золотого часа.</span>
         </p>
         <div class="service-price">
-          <span data-lang="en" class="active">Starting from</span>
+          <span data-lang="en" class="active">From</span>
           <span data-lang="pl">Od</span>
           <span data-lang="ru">От</span>
           <span class="price-val">350 zł</span>
         </div>
       </article>
 
-      <!-- 2 Evening -->
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">02</div>
         <div class="service-icon" aria-hidden="true">✨</div>
         <h3 class="service-name">
-          <span data-lang="en" class="active">Evening & Event</span>
+          <span data-lang="en" class="active">Evening &amp; Event</span>
           <span data-lang="pl">Makijaż wieczorowy</span>
           <span data-lang="ru">Вечерний макияж</span>
         </h3>
         <p class="service-desc">
           <span data-lang="en" class="active">Glamorous, statement looks for galas, proms, birthdays and special occasions — drama and elegance in perfect balance.</span>
-          <span data-lang="pl">Efektowny wygląd na galas, bale, urodziny i wyjątkowe okazje — glamour i elegancja w idealnej harmonii.</span>
-          <span data-lang="ru">Выразительный образ для выпускных, гала-вечеров, дней рождений — гламур и элегантность в идеальном балансе.</span>
+          <span data-lang="pl">Efektowny makijaż na galas, bale maturalne, urodziny — glamour i elegancja w idealnej harmonii.</span>
+          <span data-lang="ru">Выразительный образ для гала-вечеров, выпускных, дней рождений — гламур и элегантность в балансе.</span>
         </p>
         <div class="service-price">
-          <span data-lang="en" class="active">Starting from</span>
+          <span data-lang="en" class="active">From</span>
           <span data-lang="pl">Od</span>
           <span data-lang="ru">От</span>
           <span class="price-val">220 zł</span>
         </div>
       </article>
 
-      <!-- 3 Natural -->
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">03</div>
         <div class="service-icon" aria-hidden="true">🌿</div>
         <h3 class="service-name">
-          <span data-lang="en" class="active">Natural & Day Look</span>
+          <span data-lang="en" class="active">Natural &amp; Day Look</span>
           <span data-lang="pl">Makijaż dzienny</span>
           <span data-lang="ru">Дневной макияж</span>
         </h3>
         <p class="service-desc">
           <span data-lang="en" class="active">Effortless, glowing skin and soft definition — perfect for business meetings, brunches, or simply feeling your best every day.</span>
-          <span data-lang="pl">Efekt naturalnej skóry i delikatne wyrazistość — idealny do pracy, brunchy lub codziennej elegancji.</span>
+          <span data-lang="pl">Efekt rozświetlonej skóry i delikatna wyrazistość — idealny do pracy, brunchy i codziennej elegancji.</span>
           <span data-lang="ru">Сияющая кожа и лёгкая выразительность — для офиса, бранча или просто красивого дня.</span>
         </p>
         <div class="service-price">
-          <span data-lang="en" class="active">Starting from</span>
+          <span data-lang="en" class="active">From</span>
           <span data-lang="pl">Od</span>
           <span data-lang="ru">От</span>
           <span class="price-val">180 zł</span>
         </div>
       </article>
 
-      <!-- 4 Photo/Film -->
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">04</div>
         <div class="service-icon" aria-hidden="true">📸</div>
         <h3 class="service-name">
-          <span data-lang="en" class="active">Photo & Editorial</span>
+          <span data-lang="en" class="active">Photo &amp; Editorial</span>
           <span data-lang="pl">Makijaż foto/editorial</span>
           <span data-lang="ru">Фото и редакционный</span>
         </h3>
         <p class="service-desc">
           <span data-lang="en" class="active">High-definition makeup engineered for the camera — fashion shoots, LinkedIn portraits, brand campaigns and magazine editorials.</span>
-          <span data-lang="pl">Makijaż HD zaprojektowany pod kątem aparatu — sesje modowe, portrety biznesowe, kampanie i okładki.</span>
-          <span data-lang="ru">HD-макияж для камеры — fashion-съёмки, деловые портреты, рекламные кампании и журнальные редакции.</span>
+          <span data-lang="pl">Makijaż HD zaprojektowany pod kątem aparatu — sesje modowe, portrety biznesowe i kampanie.</span>
+          <span data-lang="ru">HD-макияж для камеры — fashion-съёмки, деловые портреты, рекламные кампании и журналы.</span>
         </p>
         <div class="service-price">
-          <span data-lang="en" class="active">Starting from</span>
+          <span data-lang="en" class="active">From</span>
           <span data-lang="pl">Od</span>
           <span data-lang="ru">От</span>
           <span class="price-val">260 zł</span>
         </div>
       </article>
 
-      <!-- 5 Party/Themed -->
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">05</div>
         <div class="service-icon" aria-hidden="true">🎭</div>
         <h3 class="service-name">
-          <span data-lang="en" class="active">Party & Themed</span>
+          <span data-lang="en" class="active">Party &amp; Themed</span>
           <span data-lang="pl">Makijaż imprezowy</span>
           <span data-lang="ru">Тематический / вечеринка</span>
         </h3>
         <p class="service-desc">
           <span data-lang="en" class="active">Bold, creative and expressive — from glitter festival looks to themed costume parties. No creative vision is too daring.</span>
-          <span data-lang="pl">Odważny i kreatywny — od glitterowych festiwalowych stylizacji po tematyczne imprezy. Żadna wizja nie jest zbyt śmiała.</span>
-          <span data-lang="ru">Яркий, творческий и смелый — от глиттерных фестивальных образов до тематических вечеринок. Нет слишком смелых идей.</span>
+          <span data-lang="pl">Odważny i kreatywny — od glitterowych festiwali po tematyczne imprezy. Żadna wizja nie jest zbyt śmiała.</span>
+          <span data-lang="ru">Яркий и творческий — от глиттерных фестивальных образов до тематических вечеринок. Нет слишком смелых идей.</span>
         </p>
         <div class="service-price">
-          <span data-lang="en" class="active">Starting from</span>
+          <span data-lang="en" class="active">From</span>
           <span data-lang="pl">Od</span>
           <span data-lang="ru">От</span>
           <span class="price-val">200 zł</span>
@@ -720,15 +781,13 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════
-     BROW TARIFF
-═══════════════════════════════════════════════ -->
+<!-- ═══ BROW TARIFF ═══ -->
 <section id="brow-tariff">
   <div class="container">
     <div class="tariff-wrap">
       <div class="reveal">
         <p class="section-label">
-          <span data-lang="en" class="active">Brow studio</span>
+          <span data-lang="en" class="active">Brow Studio</span>
           <span data-lang="pl">Studio brwi</span>
           <span data-lang="ru">Студия бровей</span>
         </p>
@@ -739,9 +798,9 @@
         </h2>
         <div class="section-line" aria-hidden="true"></div>
         <p style="font-size:.9rem; color:var(--mid); line-height:1.7;">
-          <span data-lang="en" class="active">Your eyebrows frame your face. Each service is adapted to your natural shape, hair texture and personal style — no cookie-cutter results.</span>
+          <span data-lang="en" class="active">Your brows frame your face. Every service is tailored to your natural shape, hair texture and personal style — no cookie-cutter results.</span>
           <span data-lang="pl">Brwi to rama Twojej twarzy. Każda usługa jest dopasowana do Twojego naturalnego kształtu i stylu.</span>
-          <span data-lang="ru">Брови — это обрамление лица. Каждая процедура адаптируется под ваш натуральный тип и стиль.</span>
+          <span data-lang="ru">Брови — обрамление лица. Каждая процедура адаптируется под ваш натуральный тип и стиль.</span>
         </p>
       </div>
       <div class="reveal">
@@ -803,7 +862,7 @@
             </tr>
             <tr>
               <td>
-                <span data-lang="en" class="active">Brow design (pencil mapping)</span>
+                <span data-lang="en" class="active">Brow design (mapping)</span>
                 <span data-lang="pl">Projekt brwi (mapowanie)</span>
                 <span data-lang="ru">Дизайн бровей (картирование)</span>
               </td>
@@ -816,9 +875,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════
-     WHY ME
-═══════════════════════════════════════════════ -->
+<!-- ═══ WHY ME ═══ -->
 <section id="why">
   <div class="container">
     <div class="reveal" style="max-width:520px; margin-bottom:3rem;">
@@ -835,7 +892,6 @@
       <div class="section-line" aria-hidden="true"></div>
     </div>
     <div class="why-grid">
-
       <div class="why-card reveal">
         <div class="why-icon" aria-hidden="true">🎓</div>
         <h3 class="why-title">
@@ -844,12 +900,11 @@
           <span data-lang="ru">Профессиональное образование</span>
         </h3>
         <p class="why-text">
-          <span data-lang="en" class="active">Certified in international makeup artistry with ongoing education in the latest techniques, products and trends — so your look is always ahead of the curve.</span>
+          <span data-lang="en" class="active">Certified makeup artist with continuous education in the latest international techniques and trends.</span>
           <span data-lang="pl">Certyfikowana wizażystka z ciągłym doskonaleniem w najnowszych technikach i trendach.</span>
-          <span data-lang="ru">Сертифицированный визажист, который постоянно совершенствует навыки и следит за актуальными тенденциями.</span>
+          <span data-lang="ru">Сертифицированный визажист с постоянным обучением по новейшим международным техникам.</span>
         </p>
       </div>
-
       <div class="why-card reveal">
         <div class="why-icon" aria-hidden="true">✦</div>
         <h3 class="why-title">
@@ -858,12 +913,11 @@
           <span data-lang="ru">Только премиальная косметика</span>
         </h3>
         <p class="why-text">
-          <span data-lang="en" class="active">I work exclusively with professional-grade, skin-friendly cosmetics — MAC, Charlotte Tilbury, Huda Beauty, Anastasia Beverly Hills and more.</span>
-          <span data-lang="pl">Pracuję wyłącznie z profesjonalną kosmetyką przyjazną skórze — MAC, Charlotte Tilbury, Huda Beauty i inne.</span>
-          <span data-lang="ru">Работаю исключительно с профессиональной косметикой — MAC, Charlotte Tilbury, Huda Beauty, Anastasia Beverly Hills и другими брендами.</span>
+          <span data-lang="en" class="active">I work exclusively with professional-grade cosmetics — MAC, Charlotte Tilbury, Huda Beauty, Anastasia Beverly Hills and more.</span>
+          <span data-lang="pl">Pracuję wyłącznie z profesjonalną kosmetyką — MAC, Charlotte Tilbury, Huda Beauty i inne.</span>
+          <span data-lang="ru">Работаю исключительно с профессиональной косметикой — MAC, Charlotte Tilbury, Huda Beauty и другими брендами.</span>
         </p>
       </div>
-
       <div class="why-card reveal">
         <div class="why-icon" aria-hidden="true">💬</div>
         <h3 class="why-title">
@@ -872,12 +926,11 @@
           <span data-lang="ru">Общение на вашем языке</span>
         </h3>
         <p class="why-text">
-          <span data-lang="en" class="active">Fluent in English, Polish and Russian — I make sure every client feels heard, understood and confident about their look from consultation to finish.</span>
-          <span data-lang="pl">Płynna angielski, polski i rosyjski — każda klientka czuje się rozumiana od konsultacji do końca sesji.</span>
-          <span data-lang="ru">Свободный английский, польский и русский — каждая клиентка чувствует себя понятой от консультации до финала.</span>
+          <span data-lang="en" class="active">Fluent in English, Polish and Russian — every client feels heard and understood from consultation to finish.</span>
+          <span data-lang="pl">Angielski, polski i rosyjski — każda klientka czuje się rozumiana od konsultacji do końca.</span>
+          <span data-lang="ru">Английский, польский и русский — каждая клиентка чувствует себя понятой от первой до последней минуты.</span>
         </p>
       </div>
-
       <div class="why-card reveal">
         <div class="why-icon" aria-hidden="true">⏱</div>
         <h3 class="why-title">
@@ -886,12 +939,11 @@
           <span data-lang="ru">Всегда вовремя</span>
         </h3>
         <p class="why-text">
-          <span data-lang="en" class="active">Your schedule is sacred. I plan every appointment meticulously so you're camera-ready exactly when you need to be — no stress, no rushing.</span>
-          <span data-lang="pl">Twój harmonogram jest dla mnie priorytetem. Planuję każdą wizytę tak, abyś była gotowa dokładnie na czas.</span>
+          <span data-lang="en" class="active">Your schedule is sacred. Every appointment is planned so you're camera-ready exactly when you need to be — no stress, no rushing.</span>
+          <span data-lang="pl">Twój harmonogram jest priorytetem. Planuję każdą wizytę, abyś była gotowa dokładnie na czas.</span>
           <span data-lang="ru">Ваш график — приоритет. Каждая запись спланирована так, чтобы вы были готовы точно в нужный момент.</span>
         </p>
       </div>
-
       <div class="why-card reveal">
         <div class="why-icon" aria-hidden="true">🌍</div>
         <h3 class="why-title">
@@ -900,12 +952,11 @@
           <span data-lang="ru">Выезд к клиентке</span>
         </h3>
         <p class="why-text">
-          <span data-lang="en" class="active">Whether it's your home, hotel suite or wedding venue — I come to you across Warsaw and the surrounding Mazovian region.</span>
-          <span data-lang="pl">Dom, hotel czy sala weselna — dojadę do Ciebie na terenie Warszawy i okolic.</span>
-          <span data-lang="ru">Дом, отель или банкетный зал — выезжаю по Варшаве и Мазовецкому региону.</span>
+          <span data-lang="en" class="active">Home, hotel suite or wedding venue — I come to you across Warsaw and the surrounding Mazovian region.</span>
+          <span data-lang="pl">Dom, hotel czy sala weselna — dojadę do Ciebie po całej Warszawie i okolicach.</span>
+          <span data-lang="ru">Дом, отель или банкетный зал — выезжаю по всей Варшаве и Мазовецкому региону.</span>
         </p>
       </div>
-
       <div class="why-card reveal">
         <div class="why-icon" aria-hidden="true">🤍</div>
         <h3 class="why-title">
@@ -914,19 +965,16 @@
           <span data-lang="ru">Индивидуальный подход</span>
         </h3>
         <p class="why-text">
-          <span data-lang="en" class="active">No template looks. Each service begins with a personal consultation — I study your features, skin tone and personality to craft something uniquely yours.</span>
-          <span data-lang="pl">Żadnych szablonów. Każda wizyta zaczyna się od konsultacji, podczas której studiuję Twoje rysy, cerę i osobowość.</span>
-          <span data-lang="ru">Никаких шаблонов. Каждая встреча начинается с консультации — изучаю черты лица, тон кожи и вашу личность.</span>
+          <span data-lang="en" class="active">No templates. Every session begins with a personal consultation — I study your features, skin tone and personality to craft something uniquely yours.</span>
+          <span data-lang="pl">Żadnych szablonów. Każda wizyta zaczyna się od konsultacji — studiuję Twoje rysy i styl.</span>
+          <span data-lang="ru">Никаких шаблонов. Каждая встреча начинается с консультации — изучаю черты лица, тон кожи и личность.</span>
         </p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════
-     CASES / PORTFOLIO
-═══════════════════════════════════════════════ -->
+<!-- ═══ CASES ═══ -->
 <section id="cases">
   <div class="container">
     <div class="reveal" style="margin-bottom:3rem;">
@@ -946,6 +994,7 @@
 
       <article class="case-card reveal">
         <div class="case-img-wrap">
+          <!-- Replace src with actual photo from @ekaterinasl_makeup -->
           <div class="case-placeholder">
             <div class="ph-icon" aria-hidden="true">📷</div>
             <div class="ph-label">Before / After</div>
@@ -962,39 +1011,17 @@
           <p class="case-desc">
             <span data-lang="en" class="active">Soft romantic glam with a flawless satin base — she glowed from ceremony to midnight dance.</span>
             <span data-lang="pl">Miękki romantyczny glam z idealną satynową bazą — promieniała od ceremonii do ostatniego tańca.</span>
-            <span data-lang="ru">Мягкий романтичный гламур с идеальной атласной базой — светилась от церемонии до последнего танца.</span>
+            <span data-lang="ru">Мягкий романтичный гламур с атласной базой — светилась от церемонии до последнего танца.</span>
           </p>
         </div>
       </article>
 
       <article class="case-card reveal">
         <div class="case-img-wrap">
+          <!-- Replace src with actual photo from @ekaterinasl_makeup -->
           <div class="case-placeholder">
             <div class="ph-icon" aria-hidden="true">📷</div>
             <div class="ph-label">After</div>
-          </div>
-          <span class="case-tag">Evening</span>
-        </div>
-        <div class="case-body">
-          <p class="case-service">
-            <span data-lang="en" class="active">Evening Look + Brows</span>
-            <span data-lang="pl">Makijaż wieczorowy + brwi</span>
-            <span data-lang="ru">Вечерний макияж + брови</span>
-          </p>
-          <h3 class="case-client">Natalia</h3>
-          <p class="case-desc">
-            <span data-lang="en" class="active">Smoky burgundy eyes paired with sculpted laminated brows — a corporate gala she owned completely.</span>
-            <span data-lang="pl">Dymne burgund oczy z wyrzeźbionymi laminowanymi brwiami — wieczór, który należał do niej.</span>
-            <span data-lang="ru">Дымчатые бордовые глаза с чёткими ламинированными бровями — вечер, который принадлежал только ей.</span>
-          </p>
-        </div>
-      </article>
-
-      <article class="case-card reveal">
-        <div class="case-img-wrap">
-          <div class="case-placeholder">
-            <div class="ph-icon" aria-hidden="true">📷</div>
-            <div class="ph-label">Before / After</div>
           </div>
           <span class="case-tag">Brows</span>
         </div>
@@ -1006,79 +1033,193 @@
           </p>
           <h3 class="case-client">Marta</h3>
           <p class="case-desc">
-            <span data-lang="en" class="active">Sparse, unruly brows transformed into full, brushed-up arches — no makeup needed to look polished every morning.</span>
-            <span data-lang="pl">Rzadkie, niezdyscyplinowane brwi przemienione w pełne, zaczesane łuki — bez makijażu każdego ranka.</span>
-            <span data-lang="ru">Редкие непослушные брови превратились в пышные дуги — утром без макияжа выглядит безупречно.</span>
+            <span data-lang="en" class="active">Sparse, unruly brows transformed into full, brushed-up arches — polished every morning without makeup.</span>
+            <span data-lang="pl">Rzadkie brwi przemienione w pełne, zaczesane łuki — bez makijażu każdego ranka.</span>
+            <span data-lang="ru">Редкие непослушные брови превратились в пышные дуги — безупречно без макияжа каждое утро.</span>
           </p>
         </div>
       </article>
 
-      <article class="case-card reveal">
-        <div class="case-img-wrap">
-          <div class="case-placeholder">
-            <div class="ph-icon" aria-hidden="true">📷</div>
-            <div class="ph-label">After</div>
-          </div>
-          <span class="case-tag">Editorial</span>
-        </div>
-        <div class="case-body">
-          <p class="case-service">
-            <span data-lang="en" class="active">Photo & Editorial</span>
-            <span data-lang="pl">Makijaż foto/editorial</span>
-            <span data-lang="ru">Фото и редакционный</span>
-          </p>
-          <h3 class="case-client">Sofia</h3>
-          <p class="case-desc">
-            <span data-lang="en" class="active">Architectural contour and graphic liner for a fashion brand campaign — every frame was magazine-ready.</span>
-            <span data-lang="pl">Architektoniczny kontur i graficzny liner do kampanii modowej — każde zdjęcie gotowe na okładkę.</span>
-            <span data-lang="ru">Архитектурный контур и графическая подводка для модной кампании — каждый кадр готов для обложки.</span>
-          </p>
+    </div>
+    <div class="cases-cta-wrap reveal">
+      <a href="cases.html" class="btn-outline">
+        <span data-lang="en" class="active">View all works</span>
+        <span data-lang="pl">Zobacz wszystkie realizacje</span>
+        <span data-lang="ru">Смотреть все работы</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRAINING ═══ -->
+<section id="training">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:3rem;">
+      <p class="section-label">
+        <span data-lang="en" class="active">Learn from a pro</span>
+        <span data-lang="pl">Naucz się od profesjonalistki</span>
+        <span data-lang="ru">Обучение у профессионала</span>
+      </p>
+      <h2 class="section-title">
+        <span data-lang="en" class="active">Makeup <em>for Yourself</em></span>
+        <span data-lang="pl">Makijaż <em>dla siebie</em></span>
+        <span data-lang="ru">Макияж <em>для себя</em></span>
+      </h2>
+      <div class="section-line" aria-hidden="true"></div>
+      <p style="max-width:560px; font-size:.92rem; color:var(--mid); line-height:1.75;">
+        <span data-lang="en" class="active">I teach women how to do their own makeup beautifully — both online and in-person in Warsaw. Choose the format that suits you.</span>
+        <span data-lang="pl">Uczę kobiety jak pięknie robić swój własny makijaż — online i stacjonarnie w Warszawie. Wybierz format, który Ci odpowiada.</span>
+        <span data-lang="ru">Я обучаю женщин красиво делать макияж самостоятельно — онлайн и офлайн в Варшаве. Выберите удобный формат.</span>
+      </p>
+    </div>
+    <div class="training-grid">
+
+      <!-- Online: Colour type + cosmetics -->
+      <article class="training-card reveal">
+        <span class="training-badge badge-online">Online · 1</span>
+        <div class="training-icon" aria-hidden="true">🎨</div>
+        <h3 class="training-name">
+          <span data-lang="en" class="active">Colour Type Analysis &amp; Cosmetics Selection</span>
+          <span data-lang="pl">Analiza kolorytu i dobór kosmetyków</span>
+          <span data-lang="ru">Подбор косметики по цветотипу</span>
+        </h3>
+        <ul class="training-list">
+          <li>
+            <span data-lang="en" class="active">Review of your current makeup bag</span>
+            <span data-lang="pl">Analiza Twojej kosmetyczki</span>
+            <span data-lang="ru">Разбор вашей косметички</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Analysis of your appearance and colour type</span>
+            <span data-lang="pl">Analiza Twojej urody i kolorytu</span>
+            <span data-lang="ru">Анализ внешности и цветотипа</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Personalised cosmetics selection</span>
+            <span data-lang="pl">Indywidualny dobór kosmetyków</span>
+            <span data-lang="ru">Подбор новой косметики</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Author's PDF guide with shade numbers and shop links tailored to you</span>
+            <span data-lang="pl">Autorski PDF z numerami odcieni i linkami do sklepów dobranymi specjalnie dla Ciebie</span>
+            <span data-lang="ru">Авторский PDF-гайд с номерами оттенков и ссылками на магазины, подобранными именно для вас</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">2 months of follow-up support</span>
+            <span data-lang="pl">Wsparcie przez 2 miesiące</span>
+            <span data-lang="ru">Обратная связь в течение 2 месяцев</span>
+          </li>
+        </ul>
+        <div class="training-price-wrap">
+          <span class="training-price-label">
+            <span data-lang="en" class="active">Investment</span>
+            <span data-lang="pl">Inwestycja</span>
+            <span data-lang="ru">Стоимость</span>
+          </span>
+          <span class="training-price-val">
+            <span data-lang="en" class="active">On request</span>
+            <span data-lang="pl">Na zapytanie</span>
+            <span data-lang="ru">По запросу</span>
+          </span>
         </div>
       </article>
 
-      <article class="case-card reveal">
-        <div class="case-img-wrap">
-          <div class="case-placeholder">
-            <div class="ph-icon" aria-hidden="true">📷</div>
-            <div class="ph-label">Before / After</div>
-          </div>
-          <span class="case-tag">Natural</span>
-        </div>
-        <div class="case-body">
-          <p class="case-service">
-            <span data-lang="en" class="active">Natural Day Look</span>
-            <span data-lang="pl">Makijaż dzienny</span>
-            <span data-lang="ru">Дневной макияж</span>
-          </p>
-          <h3 class="case-client">Anna</h3>
-          <p class="case-desc">
-            <span data-lang="en" class="active">Dewy skin, feathered brows and a tinted lip — the "no makeup" makeup that makes everyone ask "what are you doing differently?"</span>
-            <span data-lang="pl">Rozświetlona skóra, pierzaste brwi i zabarwione usta — makijaż "bez makijażu" sprawiający, że każdy pyta: "Co zmieniłaś?"</span>
-            <span data-lang="ru">Сияющая кожа, перистые брови и тинт на губах — «макияж без макияжа», от которого все спрашивают: «Что ты изменила?»</span>
-          </p>
+      <!-- Online: Full makeup course -->
+      <article class="training-card reveal">
+        <span class="training-badge badge-online">Online · 2</span>
+        <div class="training-icon" aria-hidden="true">🎥</div>
+        <h3 class="training-name">
+          <span data-lang="en" class="active">Full Online Makeup Course</span>
+          <span data-lang="pl">Pełny kurs makijażu online</span>
+          <span data-lang="ru">Полное онлайн-обучение макияжу</span>
+        </h3>
+        <ul class="training-list">
+          <li>
+            <span data-lang="en" class="active">Everything from Option 1 (colour type &amp; cosmetics)</span>
+            <span data-lang="pl">Wszystko z wariantu 1 (koloryt i dobór kosmetyków)</span>
+            <span data-lang="ru">Всё из варианта 1 (цветотип + подбор косметики)</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">3-hour video call — step-by-step makeup tailored to your face</span>
+            <span data-lang="pl">Wideorozmowa 3 h — makijaż krok po kroku dopasowany do Twojej twarzy</span>
+            <span data-lang="ru">Видеозвонок 3 часа — подробный разбор макияжа, подходящего именно вам</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Foundation, blush &amp; contour application technique</span>
+            <span data-lang="pl">Technika nakładania podkładu, różu i konturowania</span>
+            <span data-lang="ru">Как правильно наносить тональник, румяна, скульптор</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Brow makeup technique</span>
+            <span data-lang="pl">Makijaż brwi</span>
+            <span data-lang="ru">Макияж бровей</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Correcting eye and lip shapes</span>
+            <span data-lang="pl">Korygowanie kształtu oczu i ust</span>
+            <span data-lang="ru">Коррекция формы глаз и губ</span>
+          </li>
+        </ul>
+        <div class="training-price-wrap">
+          <span class="training-price-label">
+            <span data-lang="en" class="active">Investment</span>
+            <span data-lang="pl">Inwestycja</span>
+            <span data-lang="ru">Стоимость</span>
+          </span>
+          <span class="training-price-val">
+            <span data-lang="en" class="active">On request</span>
+            <span data-lang="pl">Na zapytanie</span>
+            <span data-lang="ru">По запросу</span>
+          </span>
         </div>
       </article>
 
-      <article class="case-card reveal">
-        <div class="case-img-wrap">
-          <div class="case-placeholder">
-            <div class="ph-icon" aria-hidden="true">📷</div>
-            <div class="ph-label">After</div>
-          </div>
-          <span class="case-tag">Party</span>
-        </div>
-        <div class="case-body">
-          <p class="case-service">
-            <span data-lang="en" class="active">Party & Glam</span>
-            <span data-lang="pl">Makijaż imprezowy</span>
-            <span data-lang="ru">Вечеринка и гламур</span>
-          </p>
-          <h3 class="case-client">Karolina</h3>
-          <p class="case-desc">
-            <span data-lang="en" class="active">Crystal-dusted lids, bold cut crease and full glossy lips — the most photographed woman at the New Year's Eve ball.</span>
-            <span data-lang="pl">Powieki pokryte kryształkami, odważny cut crease i błyszczące usta — najbardziej fotografowana osoba na balu sylwestrowym.</span>
-            <span data-lang="ru">Веки с кристаллами, смелый cut crease и глянцевые губы — самая фотографируемая на новогоднем балу.</span>
-          </p>
+      <!-- Offline -->
+      <article class="training-card reveal">
+        <span class="training-badge badge-offline">
+          <span data-lang="en" class="active">In-salon · Warsaw</span>
+          <span data-lang="pl">Stacjonarnie · Warszawa</span>
+          <span data-lang="ru">Офлайн · Варшава</span>
+        </span>
+        <div class="training-icon" aria-hidden="true">💄</div>
+        <h3 class="training-name">
+          <span data-lang="en" class="active">In-Person Makeup for Yourself</span>
+          <span data-lang="pl">Makijaż dla siebie — stacjonarnie</span>
+          <span data-lang="ru">Офлайн-обучение «Макияж для себя»</span>
+        </h3>
+        <ul class="training-list">
+          <li>
+            <span data-lang="en" class="active">Personal session in Ekaterina's Warsaw salon</span>
+            <span data-lang="pl">Osobista sesja w salonie Ekateriny w Warszawie</span>
+            <span data-lang="ru">Личная встреча в салоне Екатерины в Варшаве</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Programme fully tailored to your face shape and colour type</span>
+            <span data-lang="pl">Program w pełni dopasowany do kształtu Twojej twarzy i kolorytu</span>
+            <span data-lang="ru">Программа полностью подобрана под вашу форму лица и цветотип</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Hands-on practice with professional cosmetics</span>
+            <span data-lang="pl">Praktyczne ćwiczenia z profesjonalnymi kosmetykami</span>
+            <span data-lang="ru">Практика с профессиональной косметикой</span>
+          </li>
+          <li>
+            <span data-lang="en" class="active">Learn to do your own beautiful makeup every day</span>
+            <span data-lang="pl">Naucz się robić piękny makijaż każdego dnia</span>
+            <span data-lang="ru">Научитесь делать красивый макияж самостоятельно каждый день</span>
+          </li>
+        </ul>
+        <div class="training-price-wrap">
+          <span class="training-price-label">
+            <span data-lang="en" class="active">Investment</span>
+            <span data-lang="pl">Inwestycja</span>
+            <span data-lang="ru">Стоимость</span>
+          </span>
+          <span class="training-price-val">
+            <span data-lang="en" class="active">On request</span>
+            <span data-lang="pl">Na zapytanie</span>
+            <span data-lang="ru">По запросу</span>
+          </span>
         </div>
       </article>
 
@@ -1086,9 +1227,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════
-     CONTACTS
-═══════════════════════════════════════════════ -->
+<!-- ═══ CONTACTS ═══ -->
 <section id="contacts">
   <div class="container">
     <div class="contacts-wrap">
@@ -1110,7 +1249,7 @@
           <span data-lang="ru">«Каждое лицо рассказывает историю.<br>Позвольте мне помочь рассказать вашу.»</span>
         </p>
         <p class="contact-note">
-          <span data-lang="en" class="active">Available Mon–Sat, 9:00–20:00 · Warsaw & surroundings<br>Advance booking recommended for bridal and events.</span>
+          <span data-lang="en" class="active">Available Mon–Sat, 9:00–20:00 · Warsaw &amp; surroundings<br>Advance booking recommended for bridal and events.</span>
           <span data-lang="pl">Dostępna pon.–sob., 9:00–20:00 · Warszawa i okolice<br>Rezerwacja z wyprzedzeniem zalecana na śluby i eventy.</span>
           <span data-lang="ru">Приём пн.–сб., 9:00–20:00 · Варшава и окрестности<br>Предварительная запись рекомендуется для свадеб и мероприятий.</span>
         </p>
@@ -1148,17 +1287,83 @@
   </div>
 </section>
 
-<!-- Footer -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <p>© 2025 Ekaterina · Makeup Artist &amp; Brow Specialist · Warsaw &nbsp;<span>♥</span></p>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Ekaterina</div>
+        <div class="footer-brand-sub">Makeup Artist · Brow Specialist</div>
+        <p class="footer-brand-desc">
+          <span data-lang="en" class="active">Professional beauty services in Warsaw. Makeup, eyebrow design, training. Available in English, Polish and Russian.</span>
+          <span data-lang="pl">Profesjonalne usługi beauty w Warszawie. Makijaż, brwi, szkolenia. Obsługa po angielsku, polsku i rosyjsku.</span>
+          <span data-lang="ru">Профессиональные услуги красоты в Варшаве. Макияж, брови, обучение. Работаю на английском, польском и русском.</span>
+        </p>
+      </div>
+      <div>
+        <p class="footer-col-title">
+          <span data-lang="en" class="active">Location</span>
+          <span data-lang="pl">Lokalizacja</span>
+          <span data-lang="ru">Адрес</span>
+        </p>
+        <address class="footer-address" style="font-style:normal;">
+          <strong>
+            <span data-lang="en" class="active">Warsaw Beauty Salon</span>
+            <span data-lang="pl">Salon w Warszawie</span>
+            <span data-lang="ru">Салон в Варшаве</span>
+          </strong><br>
+          ul. Przykładowa 12/3<br>
+          00-000 Warszawa<br>
+          <span data-lang="en" class="active">Poland</span>
+          <span data-lang="pl">Polska</span>
+          <span data-lang="ru">Польша</span><br><br>
+          <span data-lang="en" class="active">Mon–Sat: 9:00–20:00</span>
+          <span data-lang="pl">Pon–Sob: 9:00–20:00</span>
+          <span data-lang="ru">Пн–Сб: 9:00–20:00</span>
+        </address>
+      </div>
+      <div>
+        <p class="footer-col-title">
+          <span data-lang="en" class="active">Quick links</span>
+          <span data-lang="pl">Szybkie linki</span>
+          <span data-lang="ru">Навигация</span>
+        </p>
+        <ul class="footer-links-list">
+          <li><a href="#services">
+            <span data-lang="en" class="active">Services</span>
+            <span data-lang="pl">Usługi</span>
+            <span data-lang="ru">Услуги</span>
+          </a></li>
+          <li><a href="#brow-tariff">
+            <span data-lang="en" class="active">Brow Tariffs</span>
+            <span data-lang="pl">Cennik brwi</span>
+            <span data-lang="ru">Прайс на брови</span>
+          </a></li>
+          <li><a href="#cases">Portfolio</a></li>
+          <li><a href="#training">
+            <span data-lang="en" class="active">Training</span>
+            <span data-lang="pl">Szkolenia</span>
+            <span data-lang="ru">Обучение</span>
+          </a></li>
+          <li><a href="#contacts">
+            <span data-lang="en" class="active">Contact</span>
+            <span data-lang="pl">Kontakt</span>
+            <span data-lang="ru">Контакт</span>
+          </a></li>
+          <li><a href="https://www.instagram.com/ekaterinasl_makeup" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Ekaterina · Makeup Artist &amp; Brow Specialist · Warsaw</p>
+      <p class="footer-heart">♥</p>
+    </div>
+  </div>
 </footer>
 
 <script>
-  /* ── Language switcher ── */
-  let currentLang = 'en';
-
+  /* ── Language ── */
   function setLang(lang) {
-    currentLang = lang;
     document.querySelectorAll('[data-lang]').forEach(el => {
       el.classList.toggle('active', el.dataset.lang === lang);
     });
@@ -1166,22 +1371,36 @@
       btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
     });
     document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
+  }
+  const savedLang = localStorage.getItem('lang') || 'en';
+  if (savedLang !== 'en') setLang(savedLang);
+
+  /* ── Hamburger ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+    mobileMenu.setAttribute('aria-hidden', !open);
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+    mobileMenu.setAttribute('aria-hidden', true);
   }
 
-  /* ── Scroll progress bar ── */
+  /* ── Header + progress on scroll ── */
+  const header = document.getElementById('site-header');
   const progressBar = document.getElementById('progress');
-  const langBar = document.getElementById('lang-bar');
-
-  function onScroll() {
-    const doc = document.documentElement;
-    const scrolled = doc.scrollTop || document.body.scrollTop;
-    const total = doc.scrollHeight - doc.clientHeight;
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
     progressBar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
-    langBar.classList.toggle('scrolled', scrolled > 40);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
+    header.classList.toggle('scrolled', scrolled > 40);
+  }, { passive: true });
 
-  /* ── Reveal on scroll (Intersection Observer) ── */
+  /* ── Reveal on scroll ── */
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -1189,34 +1408,31 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
-
+  }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  /* ── Parallax on hero decorative lines ── */
+  /* ── Hero parallax lines ── */
   const heroLines = document.querySelectorAll('.hero-line');
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
     heroLines.forEach((line, i) => {
-      const speed = (i + 1) * 0.18;
-      line.style.transform = `translateY(${y * speed}px)`;
+      line.style.transform = `translateY(${y * (i + 1) * 0.18}px)`;
     });
   }, { passive: true });
 
-  /* ── Hero section: subtle mouse parallax ── */
-  const heroBg = document.querySelector('.hero-bg');
+  /* ── Hero mouse parallax ── */
+  const heroBg = document.getElementById('hero-bg');
   document.getElementById('hero').addEventListener('mousemove', e => {
     const rect = e.currentTarget.getBoundingClientRect();
     const cx = (e.clientX - rect.left) / rect.width - 0.5;
-    const cy = (e.clientY - rect.top)  / rect.height - 0.5;
+    const cy = (e.clientY - rect.top) / rect.height - 0.5;
     heroBg.style.transform = `translate(${cx * 18}px, ${cy * 14}px)`;
   });
   document.getElementById('hero').addEventListener('mouseleave', () => {
-    heroBg.style.transform = '';
     heroBg.style.transition = 'transform .8s ease';
+    heroBg.style.transform = '';
     setTimeout(() => heroBg.style.transition = '', 800);
   });
 </script>
-
 </body>
 </html>
