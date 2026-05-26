@@ -55,7 +55,7 @@
     #site-header.scrolled { box-shadow: 0 2px 24px rgba(42,31,26,.09); }
     .header-inner {
       display: flex; align-items: center; justify-content: space-between;
-      width: 100%; padding-inline: 0;
+      width: 100%;
     }
     .header-logo {
       font-family: var(--ff-serif);
@@ -265,6 +265,29 @@
     }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+    /* ── Hero photo ── */
+    .hero-photo {
+      position: absolute;
+      right: clamp(2%, 7vw, 10%);
+      bottom: 0;
+      width: clamp(180px, 27vw, 380px);
+      max-height: 82%;
+      object-fit: contain;
+      object-position: bottom center;
+      mix-blend-mode: multiply;
+      filter: saturate(.88) contrast(1.05);
+      opacity: 0;
+      animation: heroPhotoIn 1.1s var(--ease) 1.1s forwards;
+      pointer-events: none;
+      user-select: none;
+    }
+    @keyframes heroPhotoIn {
+      from { opacity: 0; transform: translateY(50px); }
+      to   { opacity: .94; transform: translateY(0); }
+    }
+    @media (max-width: 860px) { .hero-photo { width: clamp(130px, 20vw, 220px); } }
+    @media (max-width: 600px) { .hero-photo { display: none; } }
+
     /* ── SERVICES ── */
     #services { background: var(--white); }
     .services-grid {
@@ -291,7 +314,7 @@
       font-family: var(--ff-serif); font-size: 3.5rem; font-weight: 300;
       color: rgba(201,169,154,.28); line-height: 1; margin-bottom: .6rem;
     }
-    .service-icon { font-size: 1.6rem; margin-bottom: .8rem; }
+    .service-icon { margin-bottom: .8rem; color: var(--rose-dk); line-height: 0; }
     .service-name {
       font-family: var(--ff-serif); font-size: 1.4rem; font-weight: 500;
       color: var(--dark); margin-bottom: .5rem;
@@ -345,7 +368,7 @@
       transition: border-color .3s, background .3s;
     }
     .why-card:hover { border-color: rgba(201,169,154,.35); background: rgba(201,169,154,.05); }
-    .why-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .why-icon { margin-bottom: 1rem; color: var(--rose); line-height: 0; }
     .why-title {
       font-family: var(--ff-serif); font-size: 1.2rem; font-weight: 500;
       color: var(--rose); margin-bottom: .6rem;
@@ -434,7 +457,7 @@
     }
     .badge-online { background: rgba(201,169,154,.2); color: var(--rose-dk); }
     .badge-offline { background: rgba(42,31,26,.08); color: var(--dark); }
-    .training-icon { font-size: 2rem; margin-bottom: .8rem; }
+    .training-icon { margin-bottom: .8rem; color: var(--rose-dk); line-height: 0; }
     .training-name {
       font-family: var(--ff-serif); font-size: 1.35rem; font-weight: 500;
       color: var(--dark); margin-bottom: .8rem; line-height: 1.3;
@@ -652,6 +675,7 @@
     <span>scroll</span>
     <div class="scroll-arrow"></div>
   </div>
+  <img class="hero-photo" src="assets/470422214_18473118457049881_5436763117538242127_n.jpg" alt="" aria-hidden="true">
 </section>
 
 <!-- ═══ SERVICES ═══ -->
@@ -674,7 +698,7 @@
 
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">01</div>
-        <div class="service-icon" aria-hidden="true">🌸</div>
+        <div class="service-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9M7.5 12a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9M12 16.5a4.5 4.5 0 1 1 4.5-4.5M12 16.5V15M16.5 12a4.5 4.5 0 1 0-4.5-4.5M16.5 12H15"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
         <h3 class="service-name">
           <span data-lang="en" class="active">Bridal Makeup</span>
           <span data-lang="pl">Makijaż ślubny</span>
@@ -695,7 +719,7 @@
 
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">02</div>
-        <div class="service-icon" aria-hidden="true">✨</div>
+        <div class="service-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3"/></svg></div>
         <h3 class="service-name">
           <span data-lang="en" class="active">Evening &amp; Event</span>
           <span data-lang="pl">Makijaż wieczorowy</span>
@@ -716,7 +740,7 @@
 
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">03</div>
-        <div class="service-icon" aria-hidden="true">🌿</div>
+        <div class="service-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
         <h3 class="service-name">
           <span data-lang="en" class="active">Natural &amp; Day Look</span>
           <span data-lang="pl">Makijaż dzienny</span>
@@ -737,7 +761,7 @@
 
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">04</div>
-        <div class="service-icon" aria-hidden="true">📸</div>
+        <div class="service-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
         <h3 class="service-name">
           <span data-lang="en" class="active">Photo &amp; Editorial</span>
           <span data-lang="pl">Makijaż foto/editorial</span>
@@ -758,7 +782,7 @@
 
       <article class="service-card reveal">
         <div class="service-number" aria-hidden="true">05</div>
-        <div class="service-icon" aria-hidden="true">🎭</div>
+        <div class="service-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2M15 16v-2M8 9h2M20 9h2M17.8 11.8 19 13M15 9h.01M17.8 6.2 19 5m-16 16 9-9M12.2 6.2 11 5"/></svg></div>
         <h3 class="service-name">
           <span data-lang="en" class="active">Party &amp; Themed</span>
           <span data-lang="pl">Makijaż imprezowy</span>
@@ -893,7 +917,7 @@
     </div>
     <div class="why-grid">
       <div class="why-card reveal">
-        <div class="why-icon" aria-hidden="true">🎓</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
         <h3 class="why-title">
           <span data-lang="en" class="active">Professional Training</span>
           <span data-lang="pl">Profesjonalne wykształcenie</span>
@@ -906,7 +930,7 @@
         </p>
       </div>
       <div class="why-card reveal">
-        <div class="why-icon" aria-hidden="true">✦</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></div>
         <h3 class="why-title">
           <span data-lang="en" class="active">Premium Products Only</span>
           <span data-lang="pl">Tylko produkty premium</span>
@@ -919,7 +943,7 @@
         </p>
       </div>
       <div class="why-card reveal">
-        <div class="why-icon" aria-hidden="true">💬</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg></div>
         <h3 class="why-title">
           <span data-lang="en" class="active">Trilingual Service</span>
           <span data-lang="pl">Obsługa w 3 językach</span>
@@ -932,7 +956,7 @@
         </p>
       </div>
       <div class="why-card reveal">
-        <div class="why-icon" aria-hidden="true">⏱</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3 class="why-title">
           <span data-lang="en" class="active">Always On Time</span>
           <span data-lang="pl">Zawsze punktualnie</span>
@@ -945,7 +969,7 @@
         </p>
       </div>
       <div class="why-card reveal">
-        <div class="why-icon" aria-hidden="true">🌍</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <h3 class="why-title">
           <span data-lang="en" class="active">On-Location Available</span>
           <span data-lang="pl">Dojazd do klientki</span>
@@ -958,7 +982,7 @@
         </p>
       </div>
       <div class="why-card reveal">
-        <div class="why-icon" aria-hidden="true">🤍</div>
+        <div class="why-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
         <h3 class="why-title">
           <span data-lang="en" class="active">Tailored to You</span>
           <span data-lang="pl">Dopasowane do Ciebie</span>
@@ -1069,7 +1093,7 @@
       <!-- Online: Colour type + cosmetics -->
       <article class="training-card reveal">
         <span class="training-badge badge-online">Online · 1</span>
-        <div class="training-icon" aria-hidden="true">🎨</div>
+        <div class="training-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
         <h3 class="training-name">
           <span data-lang="en" class="active">Colour Type Analysis &amp; Cosmetics Selection</span>
           <span data-lang="pl">Analiza kolorytu i dobór kosmetyków</span>
@@ -1119,7 +1143,7 @@
       <!-- Online: Full makeup course -->
       <article class="training-card reveal">
         <span class="training-badge badge-online">Online · 2</span>
-        <div class="training-icon" aria-hidden="true">🎥</div>
+        <div class="training-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg></div>
         <h3 class="training-name">
           <span data-lang="en" class="active">Full Online Makeup Course</span>
           <span data-lang="pl">Pełny kurs makijażu online</span>
@@ -1173,7 +1197,7 @@
           <span data-lang="pl">Stacjonarnie · Warszawa</span>
           <span data-lang="ru">Офлайн · Варшава</span>
         </span>
-        <div class="training-icon" aria-hidden="true">💄</div>
+        <div class="training-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3z"/><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"/><path d="M14.5 17.5 4.5 15"/></svg></div>
         <h3 class="training-name">
           <span data-lang="en" class="active">In-Person Makeup for Yourself</span>
           <span data-lang="pl">Makijaż dla siebie — stacjonarnie</span>
@@ -1389,6 +1413,7 @@
   const heroInner = heroEl.querySelector('.hero-inner');
   const scrollHintEl = heroEl.querySelector('.scroll-hint');
   const heroLines = document.querySelectorAll('.hero-line');
+  const heroPhoto = heroEl.querySelector('.hero-photo');
 
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
@@ -1411,6 +1436,9 @@
     heroLines.forEach((line, i) => {
       line.style.transform = `translateY(${y * (i + 1) * 0.18}px)`;
     });
+
+    /* hero photo parallax — moves slower = depth behind text */
+    if (heroPhoto) heroPhoto.style.transform = `translateY(${y * 0.18}px)`;
   }, { passive: true });
 
   /* ── Reveal on scroll ── */
