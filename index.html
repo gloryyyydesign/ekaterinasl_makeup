@@ -163,12 +163,16 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── HERO ── */
-    #hero {
+    #hero-wrap {
       position: relative;
-      height: 100svh; min-height: 580px;
+      height: 200vh; /* hero viewport + 100vh animation zone */
+    }
+    #hero {
+      position: sticky;
+      top: var(--header-h);
+      height: calc(100svh - var(--header-h)); min-height: 516px;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
-      margin-top: var(--header-h);
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -270,22 +274,37 @@
       position: absolute;
       right: clamp(2%, 7vw, 10%);
       bottom: 0;
-      width: clamp(180px, 27vw, 380px);
-      max-height: 82%;
+      width: clamp(200px, 30vw, 420px);
+      max-height: 88%;
       object-fit: contain;
       object-position: bottom center;
       mix-blend-mode: multiply;
-      filter: saturate(.88) contrast(1.05);
+      filter: saturate(.85) contrast(1.06);
       opacity: 0;
-      animation: heroPhotoIn 1.1s var(--ease) 1.1s forwards;
+      z-index: 0;
+      transform-origin: center 58%;
+      transform: scale(1);
+      /* radial mask dissolves photo edges — hides background imperfections */
+      mask-image: radial-gradient(ellipse 76% 84% at 52% 46%,
+        black 28%,
+        rgba(0,0,0,.8) 50%,
+        rgba(0,0,0,.3) 72%,
+        transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse 76% 84% at 52% 46%,
+        black 28%,
+        rgba(0,0,0,.8) 50%,
+        rgba(0,0,0,.3) 72%,
+        transparent 90%);
+      animation: heroPhotoIn 1.2s var(--ease) 1s forwards;
+      transition: transform .07s linear;
       pointer-events: none;
       user-select: none;
     }
     @keyframes heroPhotoIn {
-      from { opacity: 0; transform: translateY(50px); }
-      to   { opacity: .94; transform: translateY(0); }
+      from { opacity: 0; }
+      to   { opacity: .94; }
     }
-    @media (max-width: 860px) { .hero-photo { width: clamp(130px, 20vw, 220px); } }
+    @media (max-width: 860px) { .hero-photo { width: clamp(140px, 22vw, 240px); } }
     @media (max-width: 600px) { .hero-photo { display: none; } }
 
     /* ── SERVICES ── */
@@ -507,7 +526,7 @@
       width: 44px; height: 44px; border-radius: 50%;
       background: var(--light);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; flex-shrink: 0;
+      flex-shrink: 0; color: var(--rose-dk);
     }
     .contact-link-text { display: flex; flex-direction: column; }
     .contact-link-label {
@@ -646,6 +665,7 @@
 </div>
 
 <!-- ═══ HERO ═══ -->
+<div id="hero-wrap">
 <section id="hero" aria-label="Hero">
   <div class="hero-bg" id="hero-bg">
     <div class="hero-line" aria-hidden="true"></div>
@@ -677,6 +697,7 @@
   </div>
   <img class="hero-photo" src="assets/470422214_18473118457049881_5436763117538242127_n.jpg" alt="" aria-hidden="true">
 </section>
+</div>
 
 <!-- ═══ SERVICES ═══ -->
 <section id="services">
@@ -1273,21 +1294,21 @@
       <div class="reveal">
         <div class="contact-links">
           <a href="https://www.instagram.com/ekaterinasl_makeup" target="_blank" rel="noopener" class="contact-link">
-            <div class="contact-link-icon" aria-hidden="true">📸</div>
+            <div class="contact-link-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></div>
             <div class="contact-link-text">
               <span class="contact-link-label">Instagram</span>
               <span class="contact-link-value">@ekaterinasl_makeup</span>
             </div>
           </a>
           <a href="https://wa.me/48000000000" target="_blank" rel="noopener" class="contact-link">
-            <div class="contact-link-icon" aria-hidden="true">💬</div>
+            <div class="contact-link-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
             <div class="contact-link-text">
               <span class="contact-link-label">WhatsApp</span>
               <span class="contact-link-value">+48 000 000 000</span>
             </div>
           </a>
           <a href="tel:+48000000000" class="contact-link">
-            <div class="contact-link-icon" aria-hidden="true">📞</div>
+            <div class="contact-link-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
             <div class="contact-link-text">
               <span class="contact-link-label">
                 <span data-lang="en" class="active">Phone</span>
@@ -1409,6 +1430,7 @@
   /* ── All scroll logic (single listener) ── */
   const header = document.getElementById('site-header');
   const progressBar = document.getElementById('progress');
+  const heroWrap = document.getElementById('hero-wrap');
   const heroEl = document.getElementById('hero');
   const heroInner = heroEl.querySelector('.hero-inner');
   const scrollHintEl = heroEl.querySelector('.scroll-hint');
@@ -1425,20 +1447,23 @@
     /* header shadow */
     header.classList.toggle('scrolled', y > 40);
 
-    /* hero content scroll-fade parallax */
-    const heroH = heroEl.offsetHeight;
-    const t = Math.min(y / (heroH * 0.55), 1);
-    heroInner.style.transform = `translateY(${y * 0.38}px)`;
-    heroInner.style.opacity = Math.max(0, 1 - t * 1.8);
-    scrollHintEl.style.opacity = Math.max(0, 0.7 - t * 4);
+    /* hero animation progress: 0→1 over the sticky scroll zone */
+    const extraScroll = heroWrap.offsetHeight - heroEl.offsetHeight;
+    const progress = Math.max(0, Math.min(1, y / extraScroll));
 
-    /* decorative lines parallax */
+    /* photo scales from 1× to ~2× as user scrolls through sticky zone */
+    if (heroPhoto) heroPhoto.style.transform = `scale(${1 + progress * 1.05})`;
+
+    /* hero text drifts down and fades — faster than photo so photo reveals */
+    const textT = Math.min(1, progress * 2.4);
+    heroInner.style.transform = `translateY(${progress * 130}px)`;
+    heroInner.style.opacity = Math.max(0, 1 - textT * 1.6);
+    scrollHintEl.style.opacity = Math.max(0, 0.7 - progress * 5);
+
+    /* decorative lines drift within the sticky hero */
     heroLines.forEach((line, i) => {
-      line.style.transform = `translateY(${y * (i + 1) * 0.18}px)`;
+      line.style.transform = `translateY(${progress * 170 * (i + 1)}px)`;
     });
-
-    /* hero photo parallax — moves slower = depth behind text */
-    if (heroPhoto) heroPhoto.style.transform = `translateY(${y * 0.18}px)`;
   }, { passive: true });
 
   /* ── Reveal on scroll ── */
