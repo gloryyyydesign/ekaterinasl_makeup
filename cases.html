@@ -23,7 +23,7 @@
     body { background: var(--cream); color: var(--dark); font-family: var(--ff-sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
     img { display: block; width: 100%; object-fit: cover; }
     a { color: inherit; text-decoration: none; }
-    .container { width: min(1120px, 92vw); margin-inline: auto; }
+    .container { width: min(1120px, 92vw); margin-inline: auto; padding-inline: clamp(1.5rem, 4vw, 3rem); }
     [data-lang] { display: none; }
     [data-lang].active { display: block; }
     span[data-lang].active { display: inline; }
@@ -109,7 +109,7 @@
       align-items: center; justify-content: center; gap: .8rem;
       background: linear-gradient(145deg, #f0e8e4, #e8ddd8);
     }
-    .case-placeholder .ph-icon { font-size: 2.8rem; opacity: .4; }
+    .case-placeholder .ph-icon { opacity: .45; }
     .case-placeholder .ph-label {
       font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
       color: var(--mid); opacity: .6;
@@ -189,7 +189,7 @@
 
     <article class="case-card" data-category="bridal" style="animation-delay:.05s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">Before / After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">Before / After</div></div>
         <span class="case-tag">Bridal</span>
       </div>
       <div class="case-body">
@@ -201,7 +201,7 @@
 
     <article class="case-card" data-category="evening" style="animation-delay:.1s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">After</div></div>
         <span class="case-tag">Evening</span>
       </div>
       <div class="case-body">
@@ -213,7 +213,7 @@
 
     <article class="case-card" data-category="brows" style="animation-delay:.15s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">Before / After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">Before / After</div></div>
         <span class="case-tag">Brows</span>
       </div>
       <div class="case-body">
@@ -225,7 +225,7 @@
 
     <article class="case-card" data-category="editorial" style="animation-delay:.2s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">After</div></div>
         <span class="case-tag">Editorial</span>
       </div>
       <div class="case-body">
@@ -237,7 +237,7 @@
 
     <article class="case-card" data-category="natural" style="animation-delay:.25s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">Before / After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">Before / After</div></div>
         <span class="case-tag">Natural</span>
       </div>
       <div class="case-body">
@@ -249,7 +249,7 @@
 
     <article class="case-card" data-category="party" style="animation-delay:.3s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">After</div></div>
         <span class="case-tag">Party</span>
       </div>
       <div class="case-body">
@@ -261,7 +261,7 @@
 
     <article class="case-card" data-category="bridal" style="animation-delay:.35s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">Before / After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">Before / After</div></div>
         <span class="case-tag">Bridal</span>
       </div>
       <div class="case-body">
@@ -273,7 +273,7 @@
 
     <article class="case-card" data-category="brows" style="animation-delay:.4s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">Before / After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">Before / After</div></div>
         <span class="case-tag">Brows</span>
       </div>
       <div class="case-body">
@@ -285,7 +285,7 @@
 
     <article class="case-card" data-category="evening" style="animation-delay:.45s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">After</div></div>
         <span class="case-tag">Evening</span>
       </div>
       <div class="case-body">
@@ -297,7 +297,7 @@
 
     <article class="case-card" data-category="natural" style="animation-delay:.5s">
       <div class="case-img-wrap">
-        <div class="case-placeholder"><div class="ph-icon">📷</div><div class="ph-label">After</div></div>
+        <div class="case-placeholder"><div class="ph-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e8070" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="ph-label">After</div></div>
         <span class="case-tag">Natural</span>
       </div>
       <div class="case-body">
