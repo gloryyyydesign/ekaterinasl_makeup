@@ -163,16 +163,12 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── HERO ── */
-    #hero-wrap {
-      position: relative;
-      height: 200vh; /* hero viewport + 100vh animation zone */
-    }
     #hero {
-      position: sticky;
-      top: var(--header-h);
-      height: calc(100svh - var(--header-h)); min-height: 516px;
-      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      height: 100svh; min-height: 580px;
+      display: flex; align-items: stretch;
       overflow: hidden;
+      margin-top: var(--header-h);
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -202,12 +198,13 @@
       background: linear-gradient(180deg, rgba(201,169,154,.18), transparent);
       width: 1px; top: 0; bottom: 0; pointer-events: none;
     }
-    .hero-line:nth-child(1) { left: 15%; }
-    .hero-line:nth-child(2) { left: 50%; }
-    .hero-line:nth-child(3) { right: 15%; }
+    .hero-line:nth-child(1) { left: 12%; }
+    .hero-line:nth-child(2) { left: 35%; }
     .hero-inner {
-      position: relative; z-index: 1;
-      text-align: center; padding: 4rem 1rem 3rem;
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 clamp(1.5rem, 4vw, 4rem) 4rem clamp(2rem, 8vw, 7rem);
+      flex: 1 1 auto; max-width: 660px;
     }
     .hero-eyebrow {
       font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
@@ -233,7 +230,7 @@
     .hero-divider {
       width: 60px; height: 1px;
       background: linear-gradient(90deg, transparent, var(--rose), transparent);
-      margin: 2rem auto;
+      margin: 2rem 0;
       opacity: 0; animation: fadeUp .7s var(--ease) 1.05s forwards;
     }
     .hero-cta {
@@ -269,43 +266,40 @@
     }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-    /* ── Hero photo ── */
-    .hero-photo {
-      position: absolute;
-      right: clamp(2%, 7vw, 10%);
-      bottom: 0;
-      width: clamp(200px, 30vw, 420px);
-      max-height: 88%;
-      object-fit: contain;
-      object-position: bottom center;
-      mix-blend-mode: multiply;
-      filter: saturate(.85) contrast(1.06);
-      opacity: 0;
-      z-index: 0;
-      transform-origin: center 58%;
-      transform: scale(1);
-      /* radial mask dissolves photo edges — hides background imperfections */
-      mask-image: radial-gradient(ellipse 76% 84% at 52% 46%,
-        black 28%,
-        rgba(0,0,0,.8) 50%,
-        rgba(0,0,0,.3) 72%,
-        transparent 90%);
-      -webkit-mask-image: radial-gradient(ellipse 76% 84% at 52% 46%,
-        black 28%,
-        rgba(0,0,0,.8) 50%,
-        rgba(0,0,0,.3) 72%,
-        transparent 90%);
-      animation: heroPhotoIn 1.2s var(--ease) 1s forwards;
-      transition: transform .07s linear;
-      pointer-events: none;
-      user-select: none;
+    /* ── Hero portrait column ── */
+    .hero-portrait-col {
+      flex: 0 0 clamp(260px, 42vw, 580px);
+      position: relative;
+      overflow: hidden;
+      clip-path: inset(0 100% 0 0);
+      animation: heroFrameIn 1.1s cubic-bezier(.65,0,.175,1) .55s forwards;
     }
-    @keyframes heroPhotoIn {
-      from { opacity: 0; }
-      to   { opacity: .94; }
+    /* Left + bottom gradient blends photo into cream background */
+    .hero-portrait-col::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background:
+        linear-gradient(to right, var(--cream) 0%, rgba(250,247,244,0) 32%),
+        linear-gradient(to top, rgba(250,247,244,.9) 0%, transparent 14%);
     }
-    @media (max-width: 860px) { .hero-photo { width: clamp(140px, 22vw, 240px); } }
-    @media (max-width: 600px) { .hero-photo { display: none; } }
+    @keyframes heroFrameIn {
+      to { clip-path: inset(0 0 0 0); }
+    }
+    .hero-portrait {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: 50% 8%;
+      transform: scale(1.1) translateX(28px);
+      animation: heroPortraitSlide 1.5s var(--ease) .55s forwards;
+      transition: transform .08s linear;
+    }
+    @keyframes heroPortraitSlide {
+      to { transform: scale(1.1) translateX(0); }
+    }
+    @media (max-width: 860px) {
+      .hero-portrait-col { flex-basis: clamp(180px, 30vw, 320px); }
+    }
+    @media (max-width: 600px) { .hero-portrait-col { display: none; } }
 
     /* ── SERVICES ── */
     #services { background: var(--white); }
@@ -665,13 +659,13 @@
 </div>
 
 <!-- ═══ HERO ═══ -->
-<div id="hero-wrap">
 <section id="hero" aria-label="Hero">
   <div class="hero-bg" id="hero-bg">
     <div class="hero-line" aria-hidden="true"></div>
     <div class="hero-line" aria-hidden="true"></div>
-    <div class="hero-line" aria-hidden="true"></div>
   </div>
+
+  <!-- Left: text column -->
   <div class="hero-inner">
     <p class="hero-eyebrow">
       <span data-lang="en" class="active">Makeup Artist · Brow Specialist · Warsaw</span>
@@ -691,13 +685,18 @@
       <span data-lang="ru">Записаться</span>
     </a>
   </div>
+
+  <!-- Right: portrait column — clip-path curtain reveal -->
+  <div class="hero-portrait-col" aria-hidden="true">
+    <img src="assets/470422214_18473118457049881_5436763117538242127_n.jpg"
+         alt="" class="hero-portrait" id="hero-portrait">
+  </div>
+
   <div class="scroll-hint" aria-hidden="true">
     <span>scroll</span>
     <div class="scroll-arrow"></div>
   </div>
-  <img class="hero-photo" src="assets/470422214_18473118457049881_5436763117538242127_n.jpg" alt="" aria-hidden="true">
 </section>
-</div>
 
 <!-- ═══ SERVICES ═══ -->
 <section id="services">
@@ -1430,12 +1429,10 @@
   /* ── All scroll logic (single listener) ── */
   const header = document.getElementById('site-header');
   const progressBar = document.getElementById('progress');
-  const heroWrap = document.getElementById('hero-wrap');
   const heroEl = document.getElementById('hero');
   const heroInner = heroEl.querySelector('.hero-inner');
   const scrollHintEl = heroEl.querySelector('.scroll-hint');
-  const heroLines = document.querySelectorAll('.hero-line');
-  const heroPhoto = heroEl.querySelector('.hero-photo');
+  const heroPortrait = document.getElementById('hero-portrait');
 
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
@@ -1447,23 +1444,17 @@
     /* header shadow */
     header.classList.toggle('scrolled', y > 40);
 
-    /* hero animation progress: 0→1 over the sticky scroll zone */
-    const extraScroll = heroWrap.offsetHeight - heroEl.offsetHeight;
-    const progress = Math.max(0, Math.min(1, y / extraScroll));
+    /* hero parallax — text drifts up and fades */
+    const heroH = heroEl.offsetHeight;
+    const t = Math.min(y / (heroH * 0.65), 1);
+    heroInner.style.transform = `translateY(${y * 0.28}px)`;
+    heroInner.style.opacity = Math.max(0, 1 - t * 1.7);
+    scrollHintEl.style.opacity = Math.max(0, 0.7 - t * 4);
 
-    /* photo scales from 1× to ~2× as user scrolls through sticky zone */
-    if (heroPhoto) heroPhoto.style.transform = `scale(${1 + progress * 1.05})`;
-
-    /* hero text drifts down and fades — faster than photo so photo reveals */
-    const textT = Math.min(1, progress * 2.4);
-    heroInner.style.transform = `translateY(${progress * 130}px)`;
-    heroInner.style.opacity = Math.max(0, 1 - textT * 1.6);
-    scrollHintEl.style.opacity = Math.max(0, 0.7 - progress * 5);
-
-    /* decorative lines drift within the sticky hero */
-    heroLines.forEach((line, i) => {
-      line.style.transform = `translateY(${progress * 170 * (i + 1)}px)`;
-    });
+    /* portrait parallaxes at slower rate — creates depth */
+    if (heroPortrait) {
+      heroPortrait.style.transform = `scale(1.1) translateY(${y * 0.14}px)`;
+    }
   }, { passive: true });
 
   /* ── Reveal on scroll ── */
