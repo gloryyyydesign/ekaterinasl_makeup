@@ -165,7 +165,7 @@
     /* ── HERO ── */
     #hero {
       position: relative;
-      height: 100svh; min-height: 580px;
+      height: calc(100svh - var(--header-h)); min-height: 580px;
       display: flex; align-items: stretch;
       overflow: hidden;
       margin-top: var(--header-h);
@@ -243,7 +243,7 @@
     }
     .hero-cta:hover { background: var(--mink); transform: translateY(-2px); }
     .scroll-hint {
-      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: .5rem;
       opacity: 0; animation: fadeUp .8s var(--ease) 1.6s forwards;
     }
@@ -268,19 +268,45 @@
 
     /* ── Hero portrait column ── */
     .hero-portrait-col {
-      flex: 0 0 clamp(260px, 42vw, 580px);
-      position: relative;
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: clamp(480px, 62vw, 960px);
+      z-index: 1;
       overflow: hidden;
       clip-path: inset(0 100% 0 0);
       animation: heroFrameIn 1.1s cubic-bezier(.65,0,.175,1) .55s forwards;
     }
-    /* Left + bottom gradient blends photo into cream background */
+    /* Left blend fades photo into the text area; bottom softens the edge */
     .hero-portrait-col::before {
       content: '';
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background:
-        linear-gradient(to right, var(--cream) 0%, rgba(250,247,244,0) 32%),
-        linear-gradient(to top, rgba(250,247,244,.9) 0%, transparent 14%);
+        linear-gradient(to right, var(--cream) 0%, rgba(250,247,244,.7) 20%, rgba(250,247,244,0) 44%),
+        linear-gradient(to top, rgba(250,247,244,.85) 0%, transparent 12%);
+    }
+    /* Elegant accent line on the left edge of the portrait */
+    .hero-portrait-col::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(
+        180deg,
+        transparent 4%,
+        rgba(201,169,154,.55) 22%,
+        rgba(158,112,96,.9) 50%,
+        rgba(201,169,154,.55) 78%,
+        transparent 96%
+      );
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
+      transform: scaleY(0.25);
+      transform-origin: center;
+      animation: heroLineReveal 0.9s cubic-bezier(.65,0,.175,1) 1.55s forwards;
+    }
+    @keyframes heroLineReveal {
+      to { opacity: 1; transform: scaleY(1); }
     }
     @keyframes heroFrameIn {
       to { clip-path: inset(0 0 0 0); }
@@ -289,15 +315,15 @@
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: 50% 8%;
-      transform: scale(1.1) translateX(28px);
+      transform: scale(1.08) translateX(40px);
       animation: heroPortraitSlide 1.5s var(--ease) .55s forwards;
       transition: transform .08s linear;
     }
     @keyframes heroPortraitSlide {
-      to { transform: scale(1.1) translateX(0); }
+      to { transform: scale(1.08) translateX(0); }
     }
     @media (max-width: 860px) {
-      .hero-portrait-col { flex-basis: clamp(180px, 30vw, 320px); }
+      .hero-portrait-col { width: clamp(260px, 55vw, 560px); }
     }
     @media (max-width: 600px) { .hero-portrait-col { display: none; } }
 
