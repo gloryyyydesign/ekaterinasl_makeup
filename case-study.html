@@ -292,9 +292,13 @@
     }
     .m-hero-img {
       position: absolute; right: 0; top: 0; bottom: 0; width: 56%;
-      background: linear-gradient(to right, rgba(245,236,230,.95) 0%, rgba(245,236,230,.3) 35%, transparent 60%),
-                  linear-gradient(135deg, #e2c5bb 0%, #cbaaa0 40%, #b8948a 100%);
+      overflow: hidden;
     }
+    .m-hero-img::before {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(to right, rgba(245,236,230,.92) 0%, rgba(245,236,230,.3) 32%, transparent 55%);
+    }
+    .m-hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; }
     .m-hero-inner { position: relative; z-index: 2; }
     .m-eyebrow {
       font-size: .42rem; letter-spacing: .2em; text-transform: uppercase;
@@ -403,9 +407,13 @@
     }
     .p-hero-img {
       position: absolute; right: 0; top: 0; bottom: 0; width: 55%;
-      background: linear-gradient(to right, rgba(245,236,230,.95) 0%, transparent 40%),
-                  linear-gradient(135deg, #e2c5bb 0%, #b8948a 100%);
+      overflow: hidden;
     }
+    .p-hero-img::before {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(to right, rgba(245,236,230,.92) 0%, transparent 45%);
+    }
+    .p-hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; }
     .p-hero-inner { position: relative; z-index: 2; }
     .p-name {
       font-family: var(--ff-s); font-size: 1.5rem; font-style: italic;
@@ -569,6 +577,37 @@
     .footer-url {
       font-size: .62rem; letter-spacing: .1em;
       color: rgba(250,247,244,.18);
+    }
+
+    /* ─────────────────────────────────────────────
+       PORTFOLIO GRID
+    ───────────────────────────────────────────── */
+    .port-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+    .port-item {
+      position: relative; overflow: hidden; border-radius: 3px;
+    }
+    .port-img-wrap {
+      aspect-ratio: 4 / 5; overflow: hidden; position: relative;
+    }
+    .port-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .port-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: .5rem .65rem;
+      background: linear-gradient(to top, rgba(42,31,26,.82), transparent);
+    }
+    .port-cat {
+      font-size: .52rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--rose); display: block; margin-bottom: .15rem;
+    }
+    .port-name {
+      font-family: var(--ff-s); font-size: .78rem; font-weight: 400;
+      color: var(--cream);
     }
   </style>
 </head>
@@ -821,7 +860,7 @@
 
       <!-- Hero -->
       <div class="m-hero">
-        <div class="m-hero-img"></div>
+        <div class="m-hero-img"><img src="assets/470422214_18473118457049881_5436763117538242127_n.jpg" alt=""></div>
         <div class="m-hero-inner">
           <div class="m-eyebrow">Makeup Artist · Brow Specialist · Warsaw</div>
           <div class="m-name">Ekaterina</div>
@@ -882,9 +921,18 @@
         <div class="m-h">Client <em style="font-style:italic;color:var(--rose-dk)">Stories</em></div>
         <div class="m-rule"></div>
         <div class="m-grid3">
-          <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#e2c5bb,#b8948a);border-radius:2px;"></div>
-          <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#d4b9ae,#c9a99a);border-radius:2px;"></div>
-          <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#cbaaa0,#9e7060);border-radius:2px;"></div>
+          <div style="aspect-ratio:4/5;border-radius:2px;overflow:hidden;position:relative;">
+            <img src="assets/529008833_18518106205049881_3044308822146279752_n.jpg" alt="Aleksandra — Bridal" style="width:100%;height:100%;object-fit:cover;">
+            <span style="position:absolute;top:.3rem;left:.3rem;font-size:.33rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(42,31,26,.6);color:#fff;padding:.15rem .4rem;border-radius:2px;">Bridal</span>
+          </div>
+          <div style="aspect-ratio:4/5;border-radius:2px;overflow:hidden;position:relative;">
+            <img src="assets/706759720_18588098302049881_1449103774672456511_n.jpg" alt="Natalia — Evening" style="width:100%;height:100%;object-fit:cover;">
+            <span style="position:absolute;top:.3rem;left:.3rem;font-size:.33rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(42,31,26,.6);color:#fff;padding:.15rem .4rem;border-radius:2px;">Evening</span>
+          </div>
+          <div style="aspect-ratio:4/5;border-radius:2px;overflow:hidden;position:relative;">
+            <img src="assets/462302793_18459015040049881_7838994649522345244_n.jpg" alt="Marta — Brows" style="width:100%;height:100%;object-fit:cover;">
+            <span style="position:absolute;top:.3rem;left:.3rem;font-size:.33rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(42,31,26,.6);color:#fff;padding:.15rem .4rem;border-radius:2px;">Brows</span>
+          </div>
         </div>
       </div>
     </div>
@@ -898,7 +946,7 @@
           <div class="p-burger"><span></span><span></span><span></span></div>
         </div>
         <div class="p-hero">
-          <div class="p-hero-img"></div>
+          <div class="p-hero-img"><img src="assets/470422214_18473118457049881_5436763117538242127_n.jpg" alt=""></div>
           <div class="p-hero-inner">
             <div class="p-name">Ekaterina</div>
             <div class="p-sub">Beauty that moves with you</div>
@@ -932,10 +980,12 @@
             <span style="font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,247,244,.4);padding:.2rem .5rem;">Brows</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.6rem;">
-            <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#e2c5bb,#b8948a);border-radius:2px;position:relative;">
+            <div style="aspect-ratio:4/5;border-radius:2px;overflow:hidden;position:relative;">
+              <img src="assets/529008833_18518106205049881_3044308822146279752_n.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
               <span style="position:absolute;top:.3rem;left:.3rem;font-size:.3rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(42,31,26,.6);color:#fff;padding:.15rem .4rem;border-radius:2px;">Bridal</span>
             </div>
-            <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#d4b9ae,#9e7060);border-radius:2px;position:relative;">
+            <div style="aspect-ratio:4/5;border-radius:2px;overflow:hidden;position:relative;">
+              <img src="assets/462302793_18459015040049881_7838994649522345244_n.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
               <span style="position:absolute;top:.3rem;left:.3rem;font-size:.3rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(42,31,26,.6);color:#fff;padding:.15rem .4rem;border-radius:2px;">Brows</span>
             </div>
           </div>
@@ -943,6 +993,79 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PORTFOLIO GALLERY
+════════════════════════════════════════════════════════ -->
+<section class="cs-sec">
+  <div class="cs-sec-head">
+    <span class="cs-sec-num">05 — PORTFOLIO</span>
+    <h2 class="cs-sec-title">All 10 <em>Works</em></h2>
+  </div>
+  <div class="port-grid">
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/529008833_18518106205049881_3044308822146279752_n.jpg" alt="Aleksandra — Bridal">
+        <div class="port-caption"><span class="port-cat">Bridal</span><span class="port-name">Aleksandra</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/706759720_18588098302049881_1449103774672456511_n.jpg" alt="Natalia — Evening">
+        <div class="port-caption"><span class="port-cat">Evening</span><span class="port-name">Natalia</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/462302793_18459015040049881_7838994649522345244_n.jpg" alt="Marta — Brows">
+        <div class="port-caption"><span class="port-cat">Brows</span><span class="port-name">Marta</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/706813614_18588098356049881_4288349478226529187_n.jpg" alt="Sofia — Editorial">
+        <div class="port-caption"><span class="port-cat">Editorial</span><span class="port-name">Sofia</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/484981128_18490002247049881_2589109783605110948_n.jpg" alt="Anna — Natural">
+        <div class="port-caption"><span class="port-cat">Natural</span><span class="port-name">Anna</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/706912613_18588098371049881_5895741977027827020_n.jpg" alt="Karolina — Party">
+        <div class="port-caption"><span class="port-cat">Party</span><span class="port-name">Karolina</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/641757643_18564247153049881_2520419000125854841_n.jpg" alt="Weronika — Bridal">
+        <div class="port-caption"><span class="port-cat">Bridal</span><span class="port-name">Weronika</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/524821580_18516679741049881_9185423730283087361_n.jpg" alt="Kasia — Brows">
+        <div class="port-caption"><span class="port-cat">Brows</span><span class="port-name">Kasia</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/505760640_18507864133049881_2424886232937207906_n.jpg" alt="Olga — Evening">
+        <div class="port-caption"><span class="port-cat">Evening</span><span class="port-name">Olga</span></div>
+      </div>
+    </div>
+    <div class="port-item">
+      <div class="port-img-wrap">
+        <img src="assets/548499358_18525374656049881_4410443632758069789_n.jpg" alt="Ewa — Natural">
+        <div class="port-caption"><span class="port-cat">Natural</span><span class="port-name">Ewa</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
