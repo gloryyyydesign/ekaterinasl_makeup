@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ekaterinasl_makeup — Case Study · gloryyy design</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0f0c0b;
+      --bg2:     #151110;
+      --bg3:     #1c1614;
+      --cream:   #faf7f4;
+      --rose:    #c9a99a;
+      --rose-dk: #9e7060;
+      --mid:     #6b5148;
+      --dark:    #2a1f1a;
+      --light:   #ede6e0;
+      --line:    rgba(201,169,154,.14);
+      --ff-s:    'Cormorant Garamond', Georgia, serif;
+      --ff-sans: 'Jost', sans-serif;
+    }
+
+    html { background: var(--bg); color: var(--cream); font-family: var(--ff-sans); font-weight: 300; }
+    body { max-width: 1440px; margin: 0 auto; }
+    em { font-style: italic; }
+
+    /* ─────────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────────── */
+    .cs-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      padding: 3.5rem 4rem 3rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-eyebrow {
+      font-size: .65rem; letter-spacing: .24em; text-transform: uppercase;
+      color: var(--rose); margin-bottom: 1.1rem; opacity: .85;
+    }
+    .cs-title {
+      font-family: var(--ff-s);
+      font-size: clamp(3.4rem, 5.5vw, 6.5rem);
+      font-weight: 400; line-height: 1.0;
+      color: var(--cream);
+    }
+    .cs-title em { color: var(--rose); }
+    .cs-desc {
+      margin-top: 1.6rem;
+      font-size: .9rem; font-weight: 300; line-height: 1.8;
+      color: rgba(250,247,244,.52); max-width: 560px;
+    }
+    .cs-header-right {
+      display: flex; flex-direction: column;
+      align-items: flex-end; justify-content: space-between;
+      min-width: 160px;
+    }
+    .logo-wrap {
+      display: flex; flex-direction: column; align-items: flex-end; gap: .6rem;
+    }
+    .logo-crest svg { color: rgba(250,247,244,.45); }
+    .logo-name {
+      font-family: var(--ff-s); font-size: .92rem; font-style: italic;
+      color: rgba(250,247,244,.45); letter-spacing: .04em;
+    }
+    .cs-meta {
+      font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(250,247,244,.22); line-height: 2.2; text-align: right;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION WRAPPER
+    ───────────────────────────────────────────── */
+    .cs-sec {
+      padding: 3.5rem 4rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-sec-head {
+      display: flex; align-items: baseline; gap: 1.4rem;
+      margin-bottom: 2.8rem;
+    }
+    .cs-sec-num {
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--rose); opacity: .65; white-space: nowrap;
+    }
+    .cs-sec-title {
+      font-family: var(--ff-s);
+      font-size: clamp(1.7rem, 2.8vw, 2.8rem);
+      font-weight: 400; color: var(--cream); line-height: 1.1;
+    }
+    .cs-sec-title em { color: var(--rose); }
+
+    /* ─────────────────────────────────────────────
+       COLOR PALETTE
+    ───────────────────────────────────────────── */
+    .palette-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+    .swatch { display: flex; flex-direction: column; gap: .7rem; }
+    .swatch-block {
+      aspect-ratio: 1 / 1.1;
+      border-radius: 3px;
+    }
+    .swatch-name {
+      font-size: .75rem; font-weight: 500; color: var(--cream);
+    }
+    .swatch-hex {
+      font-size: .63rem; letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(250,247,244,.35);
+    }
+    .swatch-role {
+      font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(250,247,244,.22); margin-top: -.2rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       TYPOGRAPHY
+    ───────────────────────────────────────────── */
+    .type-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    }
+    .type-card {
+      padding: 2.8rem 2.5rem;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+    }
+    .type-display-serif {
+      font-family: var(--ff-s);
+      font-size: clamp(3.5rem, 5vw, 6rem);
+      font-weight: 400; line-height: 1;
+      color: var(--cream); margin-bottom: 1.8rem;
+    }
+    .type-display-serif em { color: var(--rose); }
+    .type-display-sans {
+      font-family: var(--ff-sans);
+      font-size: clamp(2rem, 3.5vw, 4rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--cream); margin-bottom: 1.8rem; letter-spacing: -.01em;
+    }
+    .type-tag {
+      font-size: .63rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--rose); margin-bottom: .5rem;
+    }
+    .type-meta {
+      font-size: .82rem; font-weight: 300;
+      color: rgba(250,247,244,.38); line-height: 1.9;
+    }
+
+    /* ─────────────────────────────────────────────
+       UI BUTTONS & ELEMENTS
+    ───────────────────────────────────────────── */
+    .ui-row {
+      display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-end;
+    }
+    .ui-item { display: flex; flex-direction: column; gap: .6rem; }
+    .ui-tag {
+      font-size: .58rem; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(250,247,244,.28);
+    }
+    .btn-prim {
+      font-family: var(--ff-sans);
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+      color: #fff; background: var(--rose-dk);
+      padding: .9rem 2.4rem; border-radius: 2px; border: none; cursor: default;
+      display: inline-block;
+    }
+    .btn-out {
+      font-family: var(--ff-sans);
+      font-size: .75rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--rose-dk); border: 1px solid var(--rose);
+      padding: .85rem 2.2rem; border-radius: 2px; background: none;
+      display: inline-block;
+    }
+    .pill-tag {
+      font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+      background: rgba(42,31,26,.7); color: var(--cream);
+      padding: .3rem .8rem; border-radius: 2px; display: inline-block;
+    }
+    .lang-sw {
+      display: flex; align-items: center; gap: .3rem;
+    }
+    .lang-p {
+      font-family: var(--ff-sans);
+      font-size: .63rem; letter-spacing: .12em; text-transform: uppercase;
+      padding: .3rem .45rem; border-radius: 2px; cursor: default;
+    }
+    .lang-p.on  { color: var(--rose-dk); background: rgba(201,169,154,.18); }
+    .lang-p.off { color: rgba(250,247,244,.28); background: none; }
+    .lang-sep-dot { color: var(--rose); opacity: .3; font-size: .62rem; }
+    .nav-it {
+      font-family: var(--ff-sans);
+      font-size: .7rem; letter-spacing: .13em; text-transform: uppercase;
+      color: var(--mid); padding: .4rem .7rem; display: inline-block;
+      border: 1px solid var(--line); border-radius: 2px;
+    }
+    .price-val {
+      font-family: var(--ff-s); font-size: 1.3rem; font-weight: 400;
+      color: var(--dark); background: var(--cream);
+      padding: .35rem .9rem; border-radius: 2px; display: inline-block;
+    }
+    .section-lbl {
+      font-family: var(--ff-sans);
+      font-size: .67rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--rose-dk);
+      padding: .25rem 0; display: inline-block;
+    }
+
+    /* ─────────────────────────────────────────────
+       STATS BAR
+    ───────────────────────────────────────────── */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+    .stat-cell {
+      padding: 2.2rem 4rem;
+      border-right: 1px solid var(--line);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--ff-s);
+      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-weight: 400; line-height: 1; color: var(--cream);
+    }
+    .stat-num em { color: var(--rose); }
+    .stat-lbl {
+      margin-top: .5rem;
+      font-size: .65rem; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(250,247,244,.35);
+    }
+
+    /* ─────────────────────────────────────────────
+       MARQUEE
+    ───────────────────────────────────────────── */
+    .marquee-wrap {
+      overflow: hidden; padding: 1rem 0;
+      background: var(--bg2); border-bottom: 1px solid var(--line);
+    }
+    .marquee-track {
+      display: flex; width: max-content;
+      animation: slide 22s linear infinite;
+    }
+    .m-item {
+      font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(250,247,244,.25); padding: 0 2.5rem; white-space: nowrap;
+    }
+    .m-dot { color: var(--rose); padding: 0 .3rem; }
+    @keyframes slide {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─────────────────────────────────────────────
+       DESIGN PREVIEW (MOCKUPS)
+    ───────────────────────────────────────────── */
+    .preview-wrap {
+      display: grid; grid-template-columns: 1.5fr 1fr;
+      gap: 2.5rem; align-items: start;
+    }
+
+    /* Browser frame */
+    .browser {
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--line); background: var(--bg2);
+    }
+    .browser-bar {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.2rem; background: #1a1614;
+      border-bottom: 1px solid var(--line);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .dot-r { background: #ff5f56; }
+    .dot-y { background: #ffbd2e; }
+    .dot-g { background: #27c93f; }
+    .browser-url {
+      flex: 1; background: rgba(250,247,244,.06); border-radius: 20px;
+      padding: .28rem 1rem; font-size: .62rem;
+      color: rgba(250,247,244,.28); letter-spacing: .04em;
+    }
+
+    /* Mini hero inside mockup */
+    .m-hero {
+      position: relative; min-height: 200px; overflow: hidden;
+      background: linear-gradient(160deg, #f5ece6 0%, #faf7f4 55%, #ede6e0 100%);
+      padding: 1.8rem 2rem;
+    }
+    .m-hero-img {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 56%;
+      background: linear-gradient(to right, rgba(245,236,230,.95) 0%, rgba(245,236,230,.3) 35%, transparent 60%),
+                  linear-gradient(135deg, #e2c5bb 0%, #cbaaa0 40%, #b8948a 100%);
+    }
+    .m-hero-inner { position: relative; z-index: 2; }
+    .m-eyebrow {
+      font-size: .42rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--rose-dk); margin-bottom: .5rem;
+    }
+    .m-name {
+      font-family: var(--ff-s);
+      font-size: 2rem; font-style: italic; color: var(--rose-dk);
+      line-height: 1; margin-bottom: .4rem;
+    }
+    .m-sub {
+      font-family: var(--ff-s); font-size: .7rem; font-style: italic;
+      color: var(--mid); margin-bottom: .7rem;
+    }
+    .m-btn {
+      display: inline-block;
+      background: var(--rose-dk); color: #fff;
+      font-size: .38rem; letter-spacing: .15em; text-transform: uppercase;
+      padding: .4rem 1rem; border-radius: 2px;
+    }
+    .m-divider { width: 30px; height: 1px; background: var(--rose); margin: .5rem 0; }
+
+    /* Mini sections */
+    .m-sec-white {
+      background: #fff; padding: 1.4rem 2rem;
+      border-top: 1px solid rgba(201,169,154,.15);
+    }
+    .m-sec-cream {
+      background: var(--light); padding: 1.4rem 2rem;
+      border-top: 1px solid rgba(201,169,154,.15);
+    }
+    .m-sec-dark {
+      background: var(--dark); padding: 1.4rem 2rem;
+      border-top: 1px solid rgba(201,169,154,.1);
+    }
+    .m-lbl {
+      font-size: .42rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--rose-dk); margin-bottom: .4rem;
+    }
+    .m-lbl-lt {
+      font-size: .42rem; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(201,169,154,.65); margin-bottom: .4rem;
+    }
+    .m-h {
+      font-family: var(--ff-s); font-size: .9rem; font-weight: 400; color: var(--dark);
+      margin-bottom: .5rem;
+    }
+    .m-h-lt {
+      font-family: var(--ff-s); font-size: .9rem; font-weight: 400; color: var(--cream);
+      margin-bottom: .5rem;
+    }
+    .m-rule { width: 28px; height: 1px; background: var(--rose); margin: .5rem 0; }
+    .m-grid3 {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .4rem; margin-top: .6rem;
+    }
+    .m-card {
+      background: #f5ece6; padding: .6rem .5rem; border-radius: 2px;
+    }
+    .m-card-lbl {
+      font-size: .36rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--rose-dk); margin-bottom: .25rem;
+    }
+    .m-card-title {
+      font-family: var(--ff-s); font-size: .62rem; color: var(--dark);
+    }
+    .m-card-dk {
+      background: rgba(201,169,154,.1); border: 1px solid rgba(201,169,154,.12);
+      padding: .6rem .5rem; border-radius: 2px;
+    }
+    .m-card-title-lt {
+      font-family: var(--ff-s); font-size: .62rem; color: var(--rose);
+    }
+    .m-card-body {
+      font-size: .38rem; color: rgba(250,247,244,.55); margin-top: .15rem;
+    }
+
+    /* Mobile frame */
+    .phone-wrap {
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .phone {
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--line); background: var(--bg2);
+      max-width: 210px;
+    }
+    .phone-notch {
+      height: 20px; background: #0a0807;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .phone-pill {
+      width: 56px; height: 5px; background: rgba(255,255,255,.12); border-radius: 3px;
+    }
+    .p-nav {
+      background: rgba(250,247,244,.94);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .5rem .8rem; border-bottom: 1px solid rgba(201,169,154,.18);
+    }
+    .p-logo {
+      font-family: var(--ff-s); font-size: .55rem; font-style: italic; color: var(--dark);
+    }
+    .p-burger { display: flex; flex-direction: column; gap: 2px; }
+    .p-burger span { display: block; width: 14px; height: 1px; background: var(--dark); }
+    .p-hero {
+      background: linear-gradient(160deg, #f5ece6 0%, #faf7f4 100%);
+      padding: 1.2rem 1rem; min-height: 130px; position: relative; overflow: hidden;
+    }
+    .p-hero-img {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 55%;
+      background: linear-gradient(to right, rgba(245,236,230,.95) 0%, transparent 40%),
+                  linear-gradient(135deg, #e2c5bb 0%, #b8948a 100%);
+    }
+    .p-hero-inner { position: relative; z-index: 2; }
+    .p-name {
+      font-family: var(--ff-s); font-size: 1.5rem; font-style: italic;
+      color: var(--rose-dk); line-height: 1;
+    }
+    .p-sub {
+      font-family: var(--ff-s); font-size: .52rem; font-style: italic;
+      color: var(--mid); margin-top: .3rem;
+    }
+    .p-btn {
+      margin-top: .6rem; display: inline-block;
+      background: var(--rose-dk); color: #fff;
+      font-size: .3rem; letter-spacing: .12em; text-transform: uppercase;
+      padding: .3rem .7rem; border-radius: 2px;
+    }
+
+    /* ─────────────────────────────────────────────
+       WHY IT WORKS
+    ───────────────────────────────────────────── */
+    .why-cols {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+    }
+    .why-col {
+      padding: 2.5rem 2.8rem 2.5rem 0;
+      border-right: 1px solid var(--line);
+      padding-right: 2.8rem;
+    }
+    .why-col:first-child { padding-left: 0; }
+    .why-col:last-child  { border-right: none; padding-right: 0; padding-left: 2.8rem; }
+    .why-col:nth-child(2) { padding-left: 2.8rem; }
+    .why-big-num {
+      font-family: var(--ff-s); font-size: 5rem; font-weight: 300;
+      color: rgba(201,169,154,.18); line-height: 1; margin-bottom: 1.2rem;
+    }
+    .why-col-title {
+      font-family: var(--ff-s); font-size: 1.45rem; font-weight: 400;
+      color: var(--cream); line-height: 1.2; margin-bottom: .9rem;
+    }
+    .why-col-title em { color: var(--rose); }
+    .why-col-body {
+      font-size: .85rem; font-weight: 300;
+      color: rgba(250,247,244,.5); line-height: 1.8;
+    }
+
+    /* ─────────────────────────────────────────────
+       WHAT CHANGED
+    ───────────────────────────────────────────── */
+    .changed-cols {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+    .changed-head {
+      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+      display: flex; align-items: center; gap: .7rem; margin-bottom: 1.5rem;
+    }
+    .c-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .c-dot-before { background: rgba(250,247,244,.2); }
+    .c-dot-after  { background: var(--rose); }
+    .col-before-lbl { color: rgba(250,247,244,.3); }
+    .col-after-lbl  { color: var(--rose); }
+    .changed-list { display: flex; flex-direction: column; gap: .8rem; }
+    .c-item {
+      display: flex; align-items: flex-start; gap: .8rem;
+      font-size: .87rem; font-weight: 300; line-height: 1.65;
+    }
+    .c-item.before {
+      color: rgba(250,247,244,.28);
+      text-decoration: line-through;
+      text-decoration-color: rgba(250,247,244,.12);
+    }
+    .c-item.after  { color: rgba(250,247,244,.72); }
+    .c-mark-before { color: rgba(250,247,244,.2); margin-top: .15em; }
+    .c-mark-after  { color: var(--rose); margin-top: .15em; }
+
+    /* ─────────────────────────────────────────────
+       RESULTS
+    ───────────────────────────────────────────── */
+    .results-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .res-cell {
+      padding: 2.5rem 2.5rem 2.5rem 0;
+      border-right: 1px solid var(--line);
+      margin-right: 2.5rem;
+    }
+    .res-cell:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .res-num {
+      font-family: var(--ff-s);
+      font-size: clamp(2.8rem, 4.5vw, 4.8rem);
+      font-weight: 400; line-height: 1; color: var(--cream);
+    }
+    .res-num em { color: var(--rose); }
+    .res-lbl {
+      margin-top: .5rem;
+      font-size: .66rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(250,247,244,.35);
+    }
+    .res-note {
+      margin-top: .6rem;
+      font-size: .8rem; font-weight: 300;
+      color: rgba(250,247,244,.3); line-height: 1.65;
+    }
+
+    /* ─────────────────────────────────────────────
+       DISPLAY AT SCALE
+    ───────────────────────────────────────────── */
+    .scale-sec {
+      padding: 5.5rem 4rem 5rem;
+      background: linear-gradient(155deg, #1e1510 0%, var(--bg) 60%);
+      border-bottom: 1px solid var(--line);
+      position: relative; overflow: hidden;
+    }
+    .scale-eyebrow {
+      font-size: .65rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--rose); opacity: .65; margin-bottom: 1.8rem;
+    }
+    .scale-name {
+      font-family: var(--ff-s);
+      font-size: clamp(6rem, 13vw, 14rem);
+      font-weight: 400; line-height: .9;
+      color: var(--cream);
+    }
+    .scale-name em { color: var(--rose); }
+    .scale-sub {
+      font-family: var(--ff-s);
+      font-size: clamp(1.5rem, 3.5vw, 3.5rem);
+      font-weight: 300; font-style: italic;
+      color: rgba(250,247,244,.35); margin-top: 2rem;
+      max-width: 780px;
+    }
+    .scale-deco {
+      position: absolute; right: 4rem; top: 50%; transform: translateY(-50%);
+      font-family: var(--ff-s); font-size: .68rem;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(250,247,244,.08); writing-mode: vertical-rl;
+      user-select: none;
+    }
+    .scale-line {
+      position: absolute; right: 7.5rem; top: 10%; bottom: 10%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(201,169,154,.25) 30%, rgba(201,169,154,.25) 70%, transparent);
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    .cs-footer {
+      padding: 3rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy {
+      font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(250,247,244,.2); line-height: 2;
+    }
+    .footer-right {
+      display: flex; flex-direction: column; align-items: flex-end; gap: .5rem;
+    }
+    .footer-brand {
+      font-family: var(--ff-s); font-size: .9rem; font-style: italic;
+      color: rgba(250,247,244,.4);
+    }
+    .footer-url {
+      font-size: .62rem; letter-spacing: .1em;
+      color: rgba(250,247,244,.18);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════ -->
+<header class="cs-header">
+  <div>
+    <p class="cs-eyebrow">Website Design &amp; Development — Warsaw, 2026</p>
+    <h1 class="cs-title"><em>ekaterinasl</em><br>makeup</h1>
+    <p class="cs-desc">
+      A full-brand website for a Warsaw-based makeup artist and eyebrow specialist —
+      multilingual, editorial, built to convert. Pure HTML / CSS / JS, zero dependencies,
+      three languages, live on the first day.
+    </p>
+  </div>
+  <div class="cs-header-right">
+    <div class="logo-wrap">
+      <!-- Crest -->
+      <div class="logo-crest">
+        <svg width="48" height="52" viewBox="0 0 48 52" fill="none" color="rgba(250,247,244,.42)">
+          <!-- Crown points -->
+          <path d="M24 4 L6 18 L2 10 L6 28 L42 28 L46 10 L42 18 Z"
+                stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/>
+          <!-- Crown base plate -->
+          <rect x="6" y="29" width="36" height="10" rx="1"
+                stroke="currentColor" stroke-width="1" fill="none"/>
+          <!-- Bottom trim -->
+          <rect x="10" y="40" width="28" height="5" rx="1"
+                stroke="currentColor" stroke-width="1" fill="none"/>
+          <!-- Crown jewels -->
+          <circle cx="24" cy="14" r="2.2" stroke="currentColor" stroke-width="1" fill="none"/>
+          <circle cx="24" cy="14" r=".8" fill="currentColor" opacity=".6"/>
+          <circle cx="10" cy="20" r="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
+          <circle cx="10" cy="20" r=".6" fill="currentColor" opacity=".5"/>
+          <circle cx="38" cy="20" r="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
+          <circle cx="38" cy="20" r=".6" fill="currentColor" opacity=".5"/>
+          <!-- Center detail -->
+          <line x1="24" y1="29" x2="24" y2="39" stroke="currentColor" stroke-width=".8" opacity=".4"/>
+          <line x1="6" y1="34" x2="42" y2="34" stroke="currentColor" stroke-width=".8" opacity=".25"/>
+        </svg>
+      </div>
+      <span class="logo-name">gloryyy design</span>
+    </div>
+    <div class="cs-meta">
+      Client · Ekaterina<br>
+      Type · Brand Website<br>
+      Stack · HTML / CSS / JS<br>
+      Year · 2026
+    </div>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     COLOR PALETTE
+════════════════════════════════════════════════════════ -->
+<section class="cs-sec">
+  <div class="cs-sec-head">
+    <span class="cs-sec-num">01 — COLOR PALETTE</span>
+    <h2 class="cs-sec-title">Warm <em>Neutrals</em></h2>
+  </div>
+  <div class="palette-row">
+    <div class="swatch">
+      <div class="swatch-block" style="background:#faf7f4; border:1px solid rgba(201,169,154,.2);"></div>
+      <span class="swatch-name">Cream</span>
+      <span class="swatch-hex">#faf7f4</span>
+      <span class="swatch-role">Background</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#c9a99a;"></div>
+      <span class="swatch-name">Rose</span>
+      <span class="swatch-hex">#c9a99a</span>
+      <span class="swatch-role">Accent</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#9e7060;"></div>
+      <span class="swatch-name">Rose Dark</span>
+      <span class="swatch-hex">#9e7060</span>
+      <span class="swatch-role">CTA / Emphasis</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#6b5148;"></div>
+      <span class="swatch-name">Mid</span>
+      <span class="swatch-hex">#6b5148</span>
+      <span class="swatch-role">Body Text</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#2a1f1a;"></div>
+      <span class="swatch-name">Dark</span>
+      <span class="swatch-hex">#2a1f1a</span>
+      <span class="swatch-role">Headings / Dark Bg</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#ede6e0; border:1px solid rgba(201,169,154,.2);"></div>
+      <span class="swatch-name">Light</span>
+      <span class="swatch-hex">#ede6e0</span>
+      <span class="swatch-role">Section Alt Bg</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     TYPOGRAPHY
+════════════════════════════════════════════════════════ -->
+<section class="cs-sec">
+  <div class="cs-sec-head">
+    <span class="cs-sec-num">02 — TYPOGRAPHY</span>
+    <h2 class="cs-sec-title">Serif <em>&amp;</em> Sans-Serif</h2>
+  </div>
+  <div class="type-grid">
+    <div class="type-card">
+      <div class="type-display-serif"><em>Aa Bb Cc</em></div>
+      <p class="type-tag">Display — Cormorant Garamond</p>
+      <p class="type-meta">
+        Weights used: 300 · 400 · 600<br>
+        Styles: Regular, <em>Italic</em><br>
+        Used for: hero, section titles, client names, prices
+      </p>
+    </div>
+    <div class="type-card">
+      <div class="type-display-sans">Aa Bb Cc</div>
+      <p class="type-tag">Body — Jost</p>
+      <p class="type-meta">
+        Weights used: 300 · 400 · 500<br>
+        Styles: Regular<br>
+        Used for: nav, labels, descriptions, buttons
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     UI ELEMENTS
+════════════════════════════════════════════════════════ -->
+<section class="cs-sec">
+  <div class="cs-sec-head">
+    <span class="cs-sec-num">03 — UI ELEMENTS</span>
+    <h2 class="cs-sec-title">Buttons <em>&amp;</em> Components</h2>
+  </div>
+  <div class="ui-row">
+    <div class="ui-item">
+      <span class="ui-tag">Primary CTA</span>
+      <span class="btn-prim">Book a session</span>
+    </div>
+    <div class="ui-item">
+      <span class="ui-tag">Outline CTA</span>
+      <span class="btn-out">View all works</span>
+    </div>
+    <div class="ui-item">
+      <span class="ui-tag">Portfolio Tag</span>
+      <span class="pill-tag">Bridal</span>
+    </div>
+    <div class="ui-item">
+      <span class="ui-tag">Language Switch</span>
+      <div class="lang-sw">
+        <span class="lang-p on">EN</span>
+        <span class="lang-sep-dot">·</span>
+        <span class="lang-p off">PL</span>
+        <span class="lang-sep-dot">·</span>
+        <span class="lang-p off">RU</span>
+      </div>
+    </div>
+    <div class="ui-item">
+      <span class="ui-tag">Nav Link</span>
+      <span class="nav-it">Services</span>
+    </div>
+    <div class="ui-item">
+      <span class="ui-tag">Service Price</span>
+      <span class="price-val">350 zł</span>
+    </div>
+    <div class="ui-item">
+      <span class="ui-tag">Section Label</span>
+      <span class="section-lbl">What I offer</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STATS BAR
+════════════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="stat-cell">
+    <div class="stat-num"><em>3</em></div>
+    <div class="stat-lbl">Languages — EN · PL · RU</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">10</div>
+    <div class="stat-lbl">Portfolio Cases</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num"><em>5</em></div>
+    <div class="stat-lbl">Service Categories</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">2</div>
+    <div class="stat-lbl">Revenue Streams</div>
+  </div>
+</div>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="m-item">Bridal Makeup</span><span class="m-dot">·</span>
+    <span class="m-item">Evening &amp; Event</span><span class="m-dot">·</span>
+    <span class="m-item">Brow Lamination</span><span class="m-dot">·</span>
+    <span class="m-item">Natural Look</span><span class="m-dot">·</span>
+    <span class="m-item">Editorial</span><span class="m-dot">·</span>
+    <span class="m-item">Party &amp; Themed</span><span class="m-dot">·</span>
+    <span class="m-item">Online Training</span><span class="m-dot">·</span>
+    <span class="m-item">In-Salon Warsaw</span><span class="m-dot">·</span>
+    <span class="m-item">Colour Type Analysis</span><span class="m-dot">·</span>
+    <!-- duplicate for infinite scroll -->
+    <span class="m-item">Bridal Makeup</span><span class="m-dot">·</span>
+    <span class="m-item">Evening &amp; Event</span><span class="m-dot">·</span>
+    <span class="m-item">Brow Lamination</span><span class="m-dot">·</span>
+    <span class="m-item">Natural Look</span><span class="m-dot">·</span>
+    <span class="m-item">Editorial</span><span class="m-dot">·</span>
+    <span class="m-item">Party &amp; Themed</span><span class="m-dot">·</span>
+    <span class="m-item">Online Training</span><span class="m-dot">·</span>
+    <span class="m-item">In-Salon Warsaw</span><span class="m-dot">·</span>
+    <span class="m-item">Colour Type Analysis</span><span class="m-dot">·</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FULL DESIGN PREVIEW
+════════════════════════════════════════════════════════ -->
+<section class="cs-sec">
+  <div class="cs-sec-head">
+    <span class="cs-sec-num">04 — THE WEBSITE</span>
+    <h2 class="cs-sec-title">Full Design — <em>Desktop &amp; Mobile</em></h2>
+  </div>
+  <div class="preview-wrap">
+
+    <!-- Desktop browser mockup -->
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="browser-url">gloryyyydesign.github.io/ekaterinasl_makeup/</div>
+      </div>
+
+      <!-- Hero -->
+      <div class="m-hero">
+        <div class="m-hero-img"></div>
+        <div class="m-hero-inner">
+          <div class="m-eyebrow">Makeup Artist · Brow Specialist · Warsaw</div>
+          <div class="m-name">Ekaterina</div>
+          <div class="m-divider"></div>
+          <div class="m-sub">Beauty that moves with you</div>
+          <div class="m-btn">Book a session</div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="m-sec-white">
+        <div class="m-lbl">What I offer</div>
+        <div class="m-h">Services &amp; <em style="font-style:italic;color:var(--rose-dk)">Artistry</em></div>
+        <div class="m-rule"></div>
+        <div class="m-grid3">
+          <div class="m-card">
+            <div class="m-card-lbl">01 — Bridal</div>
+            <div class="m-card-title">Bridal Makeup</div>
+            <div style="font-size:.34rem;color:var(--mid);margin-top:.2rem;">From 350 zł</div>
+          </div>
+          <div class="m-card">
+            <div class="m-card-lbl">02 — Evening</div>
+            <div class="m-card-title">Evening &amp; Event</div>
+            <div style="font-size:.34rem;color:var(--mid);margin-top:.2rem;">From 220 zł</div>
+          </div>
+          <div class="m-card">
+            <div class="m-card-lbl">03 — Natural</div>
+            <div class="m-card-title">Natural &amp; Day</div>
+            <div style="font-size:.34rem;color:var(--mid);margin-top:.2rem;">From 180 zł</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Me (dark) -->
+      <div class="m-sec-dark">
+        <div class="m-lbl-lt">The difference</div>
+        <div class="m-h-lt">Why choose <em style="font-style:italic;color:var(--rose)">Ekaterina</em></div>
+        <div class="m-rule"></div>
+        <div class="m-grid3">
+          <div class="m-card-dk">
+            <div class="m-card-title-lt">Premium Products</div>
+            <div class="m-card-body">MAC · Charlotte Tilbury · Huda Beauty</div>
+          </div>
+          <div class="m-card-dk">
+            <div class="m-card-title-lt">3 Languages</div>
+            <div class="m-card-body">EN · PL · RU service</div>
+          </div>
+          <div class="m-card-dk">
+            <div class="m-card-title-lt">On Location</div>
+            <div class="m-card-body">Home · Hotel · Venue</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio -->
+      <div class="m-sec-white">
+        <div class="m-lbl">Portfolio</div>
+        <div class="m-h">Client <em style="font-style:italic;color:var(--rose-dk)">Stories</em></div>
+        <div class="m-rule"></div>
+        <div class="m-grid3">
+          <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#e2c5bb,#b8948a);border-radius:2px;"></div>
+          <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#d4b9ae,#c9a99a);border-radius:2px;"></div>
+          <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#cbaaa0,#9e7060);border-radius:2px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile mockups -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-pill"></div></div>
+        <div class="p-nav">
+          <span class="p-logo">ekaterinasl makeup</span>
+          <div class="p-burger"><span></span><span></span><span></span></div>
+        </div>
+        <div class="p-hero">
+          <div class="p-hero-img"></div>
+          <div class="p-hero-inner">
+            <div class="p-name">Ekaterina</div>
+            <div class="p-sub">Beauty that moves with you</div>
+            <div class="p-btn">Book a session</div>
+          </div>
+        </div>
+        <div style="background:#fff;padding:1rem;">
+          <div class="m-lbl">What I offer</div>
+          <div style="font-family:var(--ff-s);font-size:.75rem;color:var(--dark);">Services &amp; <em style="color:var(--rose-dk);">Artistry</em></div>
+          <div style="width:22px;height:1px;background:var(--rose);margin:.5rem 0;"></div>
+          <div style="display:flex;flex-direction:column;gap:.4rem;">
+            <div class="m-card"><div class="m-card-title">Bridal Makeup — 350 zł</div></div>
+            <div class="m-card"><div class="m-card-title">Evening &amp; Event — 220 zł</div></div>
+            <div class="m-card"><div class="m-card-title">Natural &amp; Day — 180 zł</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-pill"></div></div>
+        <div class="p-nav">
+          <span class="p-logo">ekaterinasl makeup</span>
+          <div class="p-burger"><span></span><span></span><span></span></div>
+        </div>
+        <div style="background:var(--dark);padding:1rem;">
+          <div class="m-lbl-lt">Portfolio</div>
+          <div style="font-family:var(--ff-s);font-size:.75rem;color:var(--cream);">Client <em style="color:var(--rose);">Stories</em></div>
+          <div style="display:flex;gap:.3rem;margin-top:.6rem;">
+            <span style="font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream);background:rgba(201,169,154,.15);padding:.2rem .5rem;border-radius:2px;">All</span>
+            <span style="font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);background:rgba(201,169,154,.25);padding:.2rem .5rem;border-radius:2px;">Bridal</span>
+            <span style="font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,247,244,.4);padding:.2rem .5rem;">Brows</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.6rem;">
+            <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#e2c5bb,#b8948a);border-radius:2px;position:relative;">
+              <span style="position:absolute;top:.3rem;left:.3rem;font-size:.3rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(42,31,26,.6);color:#fff;padding:.15rem .4rem;border-radius:2px;">Bridal</span>
+            </div>
+            <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#d4b9ae,#9e7060);border-radius:2px;position:relative;">
+              <span style="position:absolute;top:.3rem;left:.3rem;font-size:.3rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(42,31,26,.6);color:#fff;padding:.15rem .4rem;border-radius:2px;">Brows</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WHY IT WORKS
+════════════════════════════════════════════════════════ -->
+<section class="cs-sec">
+  <div class="cs-sec-head">
+    <span class="cs-sec-num">05 — DESIGN RATIONALE</span>
+    <h2 class="cs-sec-title">Why It <em>Works</em></h2>
+  </div>
+  <div class="why-cols">
+    <div class="why-col">
+      <div class="why-big-num">01</div>
+      <h3 class="why-col-title"><em>Editorial</em><br>Discipline</h3>
+      <p class="why-col-body">
+        A single hero portrait, a clean typographic hierarchy, and restraint at every
+        touchpoint build the kind of trust a premium beauty professional needs. No
+        clutter — only what earns the booking.
+      </p>
+    </div>
+    <div class="why-col">
+      <div class="why-big-num">02</div>
+      <h3 class="why-col-title">Three Audiences,<br><em>One Voice</em></h3>
+      <p class="why-col-body">
+        EN / PL / RU language switching is instant, saved per-user, and invisible to
+        anyone who doesn't need it. The entire Warsaw expat and local market is served
+        from a single URL with zero friction.
+      </p>
+    </div>
+    <div class="why-col">
+      <div class="why-big-num">03</div>
+      <h3 class="why-col-title"><em>Restrained</em><br>Contrast</h3>
+      <p class="why-col-body">
+        Warm cream backgrounds, a single rose accent family, and deep neutral darks
+        align perfectly with the brand's premium positioning. The palette does the
+        selling before a word is read.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WHAT CHANGED
+════════════════════════════════════════════════════════ -->
+<section class="cs-sec">
+  <div class="cs-sec-head">
+    <span class="cs-sec-num">06 — BEFORE / AFTER</span>
+    <h2 class="cs-sec-title">What <em>Changed</em></h2>
+  </div>
+  <div class="changed-cols">
+    <div>
+      <div class="changed-head col-before-lbl">
+        <span class="c-dot c-dot-before"></span> Before
+      </div>
+      <div class="changed-list">
+        <div class="c-item before"><span class="c-mark-before">—</span> No web presence — clients found via Instagram only</div>
+        <div class="c-item before"><span class="c-mark-before">—</span> No price transparency — DMs clogged with basic questions</div>
+        <div class="c-item before"><span class="c-mark-before">—</span> No multilingual reach — RU / EN leads difficult to convert</div>
+        <div class="c-item before"><span class="c-mark-before">—</span> Services &amp; brow tariffs never publicly documented</div>
+        <div class="c-item before"><span class="c-mark-before">—</span> Training income channel untapped digitally</div>
+        <div class="c-item before"><span class="c-mark-before">—</span> Portfolio scattered across Instagram stories</div>
+      </div>
+    </div>
+    <div>
+      <div class="changed-head col-after-lbl">
+        <span class="c-dot c-dot-after"></span> After
+      </div>
+      <div class="changed-list">
+        <div class="c-item after"><span class="c-mark-after">+</span> Full editorial website — live, indexed, shareable link</div>
+        <div class="c-item after"><span class="c-mark-after">+</span> All services &amp; brow tariffs clearly priced on-page</div>
+        <div class="c-item after"><span class="c-mark-after">+</span> EN / PL / RU — all three audiences served from one site</div>
+        <div class="c-item after"><span class="c-mark-after">+</span> 10-case portfolio with category filters for client validation</div>
+        <div class="c-item after"><span class="c-mark-after">+</span> Training section opens a second, season-independent income stream</div>
+        <div class="c-item after"><span class="c-mark-after">+</span> Pre-qualified leads arrive informed — fewer questions, higher check</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     RESULTS / IMPACT
+════════════════════════════════════════════════════════ -->
+<section class="cs-sec">
+  <div class="cs-sec-head">
+    <span class="cs-sec-num">07 — IMPACT</span>
+    <h2 class="cs-sec-title">What This <em>Unlocks</em></h2>
+  </div>
+  <div class="results-row">
+    <div class="res-cell">
+      <div class="res-num"><em>3×</em></div>
+      <div class="res-lbl">Audience Reach</div>
+      <div class="res-note">Polish, Russian-speaking and English-speaking clients from one single URL</div>
+    </div>
+    <div class="res-cell">
+      <div class="res-num">10</div>
+      <div class="res-lbl">Portfolio Works</div>
+      <div class="res-note">Categorised cases with real client names — social proof before the first message</div>
+    </div>
+    <div class="res-cell">
+      <div class="res-num"><em>2×</em></div>
+      <div class="res-lbl">Revenue Streams</div>
+      <div class="res-note">Services + training — an income channel that works even on fully-booked days</div>
+    </div>
+    <div class="res-cell">
+      <div class="res-num">0</div>
+      <div class="res-lbl">"How much?" DMs</div>
+      <div class="res-note">Full price list on-page — leads arrive pre-informed and ready to book</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     DISPLAY AT SCALE
+════════════════════════════════════════════════════════ -->
+<div class="scale-sec">
+  <div class="scale-line"></div>
+  <p class="scale-eyebrow">Display at scale</p>
+  <h2 class="scale-name"><em>Ekaterina</em></h2>
+  <p class="scale-sub">Beauty that moves with you</p>
+  <div class="scale-deco">Makeup Artist · Brow Specialist · Warsaw · 2026</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer class="cs-footer">
+  <div>
+    <div class="footer-copy">
+      gloryyy design · Case Study · 2026<br>
+      gloryyyydesign.github.io/ekaterinasl_makeup
+    </div>
+  </div>
+  <div class="footer-right">
+    <svg width="38" height="42" viewBox="0 0 48 52" fill="none" color="rgba(250,247,244,.25)">
+      <path d="M24 4 L6 18 L2 10 L6 28 L42 28 L46 10 L42 18 Z"
+            stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/>
+      <rect x="6" y="29" width="36" height="10" rx="1" stroke="currentColor" stroke-width="1" fill="none"/>
+      <rect x="10" y="40" width="28" height="5" rx="1" stroke="currentColor" stroke-width="1" fill="none"/>
+      <circle cx="24" cy="14" r="2.2" stroke="currentColor" stroke-width="1" fill="none"/>
+      <circle cx="24" cy="14" r=".8" fill="currentColor" opacity=".6"/>
+      <circle cx="10" cy="20" r="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
+      <circle cx="38" cy="20" r="1.5" stroke="currentColor" stroke-width="1" fill="none"/>
+      <line x1="24" y1="29" x2="24" y2="39" stroke="currentColor" stroke-width=".8" opacity=".4"/>
+      <line x1="6" y1="34" x2="42" y2="34" stroke="currentColor" stroke-width=".8" opacity=".25"/>
+    </svg>
+    <span class="footer-brand">gloryyy design</span>
+    <span class="footer-url">gloryyyydesign.github.io</span>
+  </div>
+</footer>
+
+</body>
+</html>
